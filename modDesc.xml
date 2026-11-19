@@ -39,6 +39,8 @@ Multiplayer: Gefahren wird auf dem Server, alle Mitspieler sehen dasselbe. Jeder
 
 Hinweis: Es wird nur vorwärts gefahren und es findet keine Wegsuche statt - in sehr engen Hofeinfahrten kann ein Gespann hängen bleiben. Bleibt das Fahrzeug zu lange stehen, beendet die Mod das Folgen von selbst.
 
+Wer mein Mitspieler HUD nutzt, sieht dort nebenbei, welches Fahrzeug gerade wem folgt. Nötig ist es nicht - die beiden Mods kennen sich nur, wenn ohnehin beide geladen sind.
+
 Script-Mod, daher nur für PC und Mac.]]></de>
         <en><![CDATA[This mod came out of a practical need in our own team. We wanted to take a second vehicle along to the field, nothing more - and for that, AutoDrive was more than we needed. Laying out a route network, maintaining it and keeping it in your head pays off if you make full use of it; for "just drive behind me" it is a big apparatus. So this mod does that one thing, and nothing else.
 
@@ -69,6 +71,8 @@ Multiplayer: driving happens on the server, everyone sees the same thing. A play
 
 Note: the vehicle only drives forwards and there is no path finding - in very tight farm entrances a combination may get stuck. If a vehicle stands still for too long, the mod ends the following on its own.
 
+If you also run my Coworker HUD, it shows there which vehicle is currently following whom. It is not required - the two mods only notice each other when both happen to be loaded.
+
 Script mod, therefore PC and Mac only.]]></en>
         <fr><![CDATA[Ce mod est né d'un besoin concret au sein de notre équipe. Nous voulions emmener un deuxième véhicule au champ, rien de plus - et pour cela, AutoDrive nous paraissait démesuré. Créer un réseau d'itinéraires, l'entretenir et le garder en tête vaut la peine quand on l'exploite à fond ; pour « suis-moi, tout simplement », c'est une grosse machinerie. Ce mod fait donc cette seule chose, et rien d'autre.
 
@@ -98,6 +102,8 @@ La distance, la vitesse maximale, le rayon de recherche et le nombre maximal de 
 Multijoueur : la conduite est calculée sur le serveur, tous les joueurs voient la même chose. Chaque joueur ne peut envoyer que les véhicules auxquels sa ferme a accès. CTRL + J transmet toute votre file à un joueur voisin - pratique lorsqu'il poursuit la route et que vous faites autre chose. Si vous descendez un instant - ouvrir un portail, faire le plein, faire autre chose -, la file reste en place et vous attend. Elle ne se défait que lorsque le conducteur a quitté la partie. Les administrateurs peuvent dissoudre toutes les files d'un coup avec la commande "fmStopp".
 
 Remarque : le véhicule roule uniquement en marche avant et ne calcule pas d'itinéraire - dans une entrée de ferme très étroite, un attelage peut rester bloqué. Si le véhicule reste trop longtemps immobile, le mod met fin au suivi de lui-même.
+
+Si vous utilisez aussi mon HUD Coéquipiers, il indique au passage quel véhicule suit qui. Ce n'est pas obligatoire : les deux mods ne se reconnaissent que si les deux sont chargés.
 
 Mod de script, donc uniquement pour PC et Mac.]]></fr>
     </description>
