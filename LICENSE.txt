@@ -1,0 +1,38 @@
+Alle Rechte vorbehalten / All rights reserved
+(c) 2026 OGW
+
+
+DEUTSCH
+
+Diese Mod darf heruntergeladen und im Landwirtschafts-Simulator benutzt
+werden, privat wie auf eigenen Servern.
+
+Ohne meine vorherige Zustimmung nicht erlaubt ist:
+
+  - die Mod auf anderen Seiten oder Portalen anzubieten
+  - veraenderte Fassungen weiterzugeben
+  - Teile des Quelltextes in eigenen Mods zu verwenden
+  - jede Art von kommerzieller Nutzung
+
+Der Quelltext liegt offen, damit nachvollziehbar ist, was die Mod tut.
+Das ist ausdruecklich keine Freigabe zur Weiterverwendung.
+
+Wer etwas davon vorhat: einfach fragen. Meist sage ich ja.
+
+
+ENGLISH
+
+You may download this mod and use it in Farming Simulator, in single
+player as well as on your own servers.
+
+Without my prior permission you may not:
+
+  - offer the mod on other sites or portals
+  - distribute modified versions
+  - reuse parts of the source code in your own mods
+  - use it commercially in any way
+
+The source is readable so you can see what the mod does. That is not a
+licence to reuse it.
+
+If you want to do any of the above, just ask. The answer is usually yes.

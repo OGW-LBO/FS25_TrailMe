@@ -1,0 +1,9 @@
+# Gebaute Archive - die haengen als Release an der Version
+*.zip
+
+# Arbeitsdateien, die niemanden ausserhalb interessieren
+_icon_vorschau.png
+veroeffentlichung_*.txt
+*.bak
+*.tmp
+__pycache__/

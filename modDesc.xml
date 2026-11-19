@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<modDesc descVersion="116" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
+    <author>OGW</author>
+    <version>1.0.0.0</version>
+
+    <title>
+        <de>Folge Mir</de>
+        <en>Follow Me</en>
+        <fr>Suis Moi</fr>
+    </title>
+
+    <description>
+        <de><![CDATA[Ein Fahrzeug fährt deinem Fahrzeug automatisch hinterher - im Einzelspieler wie im Multiplayer.
+
+So funktioniert es:
+- Du sitzt selbst am Steuer und fährst an das Fahrzeug heran, das folgen soll
+- STRG + H: Dieses Fahrzeug folgt dir ab sofort
+- Mehrere gehen auch: Jedes weitere Fahrzeug hängt sich hinten an die Reihe und folgt dem Fahrzeug davor
+- Steht kein freies Fahrzeug mehr in der Nähe, hält STRG + H den nächsten Folger an
+- STRG + J: Gibt die ganze Reihe an einen Mitspieler ab, neben dem du stehst
+- STRG + SHIFT + H: Alle Fahrzeuge, die dir folgen, halten an
+- Steigst du in ein folgendes Fahrzeug ein, übernimmst du wieder selbst
+
+Zur Tastenbelegung: STRG + H und STRG + SHIFT + H sind nur die Vorgabe. Nutzt eine andere Mod dieselbe Kombination, meldet das Spiel beim Start eine Doppelbelegung - dann in den Einstellungen unter Tastenbelegung nach "Folge mir" suchen und eine freie Taste vergeben. Dasselbe gilt, wenn gar nichts passiert: hat die Aktion dort keine Taste, greift die Vorgabe aus der Mod nicht mehr und du musst einmal selbst belegen.
+
+Das Gespann bleibt, wie du es vorbereitet hast. Anbaugeräte und Anhänger werden weder abgehängt noch eingeklappt oder angehoben - der Folger zieht sein komplettes Gespann mit. Für den Abstand wird die tatsächliche Länge beider Gespanne mitgerechnet, der eingestellte Wert ist also die Lücke zwischen dem Heck vor dir und der Front dahinter. Bei einem langen Häcksler oder Anhängerzug macht das mehrere Meter aus.
+
+Das Fahrzeug fährt nicht auf Luftlinie, sondern auf deiner Spur: Es merkt sich deinen Weg und fährt ihn nach. Dadurch schneidet es keine Kurven durch Zäune oder Gebäude und fährt in der Feldeinfahrt dieselbe Linie wie du. Bleibst du stehen, bleibt es auch stehen. Gelenkt wird über dieselbe Spielfunktion, mit der auch die Helfer des Spiels fahren, deshalb nimmt es in engen Kurven von selbst Gas weg.
+
+Einem Spieler zu Fuß folgt bewusst nichts - die Funktion lässt sich nur am Steuer auslösen.
+
+Einstellbar sind Abstand, Höchstgeschwindigkeit, Suchradius und die Höchstzahl der Fahrzeuge in einer Reihe. Die Werte stehen in "modSettings/FS25_FollowMe/settings.xml" und lassen sich im Spiel über die Konsole ändern: "fmInfo" zeigt alle Werte, "fmSet <name> <wert>" setzt einen, "fmStopp" hält alles an.
+
+Multiplayer: Gefahren wird auf dem Server, alle Mitspieler sehen dasselbe. Jeder Spieler kann nur Fahrzeuge losschicken, auf die seine Farm Zugriff hat. Mit STRG + J gibst du deine ganze Reihe an einen Mitspieler ab, neben dem du stehst - praktisch, wenn er weiterfährt und du etwas anderes machst. Steigst du zwischendurch aus - Tor öffnen, tanken, kurz etwas anderes machen -, bleibt die Reihe stehen und wartet auf dich. Aufgelöst wird sie erst, wenn der Fahrer das Spiel verlassen hat. Serverbetreiber und Administratoren können mit dem Konsolenbefehl "fmStopp" alle Reihen auf einmal auflösen.
+
+Hinweis: Es wird nur vorwärts gefahren und es findet keine Wegsuche statt - in sehr engen Hofeinfahrten kann ein Gespann hängen bleiben. Bleibt das Fahrzeug zu lange stehen, beendet die Mod das Folgen von selbst.
+
+Script-Mod, daher nur für PC und Mac.]]></de>
+        <en><![CDATA[A vehicle drives behind your own vehicle automatically - in single player as well as multiplayer.
+
+How it works:
+- You are behind the wheel yourself and pull up next to the vehicle that should follow
+- CTRL + H: that vehicle starts following you
+- Several work too: every additional vehicle joins the back of the line and follows the one in front of it
+- If no free vehicle is nearby any more, CTRL + H stops the nearest follower instead
+- CTRL + J: hands the whole line over to another player you are standing next to
+- CTRL + SHIFT + H: every vehicle following you comes to a halt
+- Entering a following vehicle hands control back to you
+
+On the key bindings: CTRL + H and CTRL + SHIFT + H are only the default. If another mod uses the same combination, the game reports a conflict at startup - look for "Follow me" under Settings, Controls and pick a free key. The same goes if nothing happens at all: once the action sits there without a key, the default from the mod no longer applies and you have to assign it yourself.
+
+The combination stays exactly as you prepared it. Implements and trailers are never detached, folded or raised - the follower pulls its whole combination along. The actual length of both combinations is taken into account for the distance, so the configured value is the gap between the rear end in front of you and the front end behind. On a long forage harvester or a trailer train that makes several metres of difference.
+
+The vehicle does not take the direct line, it follows your track: it records your path and drives along it. That way it does not cut corners through fences or buildings and takes the same line into the field entrance as you did. When you stop, it stops. Steering uses the same game function the hired workers drive with, so it eases off the throttle in tight corners by itself.
+
+Nothing follows a player on foot by design - the function can only be triggered from behind the wheel.
+
+Distance, top speed, search radius and the maximum number of vehicles in a line can be configured. The values live in "modSettings/FS25_FollowMe/settings.xml" and can be changed in game from the console: "fmInfo" lists all values, "fmSet <name> <value>" sets one, "fmStopp" stops everything.
+
+Multiplayer: driving happens on the server, everyone sees the same thing. A player can only send out vehicles their farm has access to. CTRL + J hands your whole line over to another player you are standing next to - handy when they carry on and you do something else. If you get out for a moment - opening a gate, refuelling, doing something else - the line stays put and waits for you. It only breaks up once the driver has left the game. Server owners and admins can dissolve every line at once with the console command "fmStopp".
+
+Note: the vehicle only drives forwards and there is no path finding - in very tight farm entrances a combination may get stuck. If a vehicle stands still for too long, the mod ends the following on its own.
+
+Script mod, therefore PC and Mac only.]]></en>
+        <fr><![CDATA[Un véhicule suit automatiquement le vôtre - en solo comme en multijoueur.
+
+Fonctionnement :
+- Vous êtes vous-même au volant et vous approchez du véhicule qui doit suivre
+- CTRL + H : ce véhicule se met à vous suivre
+- Plusieurs fonctionnent aussi : chaque véhicule supplémentaire se place en fin de file et suit celui qui le précède
+- Si plus aucun véhicule libre ne se trouve à proximité, CTRL + H arrête le suiveur le plus proche
+- CTRL + J : transmet toute la file à un joueur à côté duquel vous vous trouvez
+- CTRL + MAJ + H : tous les véhicules qui vous suivent s'arrêtent
+- En montant dans un véhicule qui vous suit, vous en reprenez les commandes
+
+À propos des touches : CTRL + H et CTRL + MAJ + H ne sont que les valeurs par défaut. Si un autre mod utilise la même combinaison, le jeu signale un conflit au démarrage - cherchez alors "Suis moi" dans Paramètres, Commandes et attribuez une touche libre. Idem si rien ne se passe : lorsque l'action y figure sans touche, la valeur par défaut du mod ne s'applique plus et vous devez l'attribuer vous-même.
+
+L'attelage reste tel que vous l'avez préparé. Les outils et les remorques ne sont ni dételés, ni repliés, ni relevés - le suiveur emmène tout son attelage. La longueur réelle des deux attelages est prise en compte pour la distance : la valeur réglée correspond donc à l'espace entre l'arrière devant vous et l'avant derrière. Sur une ensileuse longue ou un train de remorques, cela représente plusieurs mètres.
+
+Le véhicule ne coupe pas à travers champs : il enregistre votre trajet et le refait. Il ne traverse donc ni clôtures ni bâtiments et prend la même ligne que vous à l'entrée du champ. Quand vous vous arrêtez, il s'arrête aussi. La direction utilise la même fonction du jeu que les ouvriers, il lève donc le pied de lui-même dans les virages serrés.
+
+Rien ne suit un joueur à pied, c'est voulu : la fonction ne se déclenche qu'au volant.
+
+La distance, la vitesse maximale, le rayon de recherche et le nombre maximal de véhicules par file se règlent. Les valeurs se trouvent dans "modSettings/FS25_FollowMe/settings.xml" et se modifient en jeu depuis la console : "fmInfo" affiche toutes les valeurs, "fmSet <nom> <valeur>" en modifie une, "fmStopp" arrête tout.
+
+Multijoueur : la conduite est calculée sur le serveur, tous les joueurs voient la même chose. Chaque joueur ne peut envoyer que les véhicules auxquels sa ferme a accès. CTRL + J transmet toute votre file à un joueur voisin - pratique lorsqu'il poursuit la route et que vous faites autre chose. Si vous descendez un instant - ouvrir un portail, faire le plein, faire autre chose -, la file reste en place et vous attend. Elle ne se défait que lorsque le conducteur a quitté la partie. Les administrateurs peuvent dissoudre toutes les files d'un coup avec la commande "fmStopp".
+
+Remarque : le véhicule roule uniquement en marche avant et ne calcule pas d'itinéraire - dans une entrée de ferme très étroite, un attelage peut rester bloqué. Si le véhicule reste trop longtemps immobile, le mod met fin au suivi de lui-même.
+
+Mod de script, donc uniquement pour PC et Mac.]]></fr>
+    </description>
+
+    <iconFilename>icon_FollowMe.dds</iconFilename>
+
+    <multiplayer supported="true"/>
+
+    <extraSourceFiles>
+        <sourceFile filename="FolgeMirMain.lua"/>
+        <sourceFile filename="FolgeMirEvent.lua"/>
+    </extraSourceFiles>
+
+    <specializations>
+        <specialization name="folgeMir" className="FolgeMirVehicle" filename="FolgeMirVehicle.lua"/>
+    </specializations>
+
+    <actions>
+        <action name="FOLGEMIR_TOGGLE"/>
+        <action name="FOLGEMIR_UEBERGABE"/>
+        <action name="FOLGEMIR_STOPP"/>
+    </actions>
+
+    <actionBindings>
+        <action name="FOLGEMIR_TOGGLE">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_h"/>
+        </action>
+        <action name="FOLGEMIR_UEBERGABE">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_j"/>
+        </action>
+        <action name="FOLGEMIR_STOPP">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_lshift KEY_lctrl KEY_h"/>
+        </action>
+    </actionBindings>
+
+    <helpLines>
+        <category title="$l10n_fm_help_category">
+            <page id="folgeMirHelp" title="$l10n_fm_help_pageTitle" iconSliceId="misc_loadingMachines">
+                <paragraph>
+                    <text text="$l10n_fm_help_intro"/>
+                </paragraph>
+                <paragraph>
+                    <title text="$l10n_fm_help_keysTitle"/>
+                    <text text="$l10n_fm_help_keys"/>
+                </paragraph>
+                <paragraph>
+                    <title text="$l10n_fm_help_rigTitle"/>
+                    <text text="$l10n_fm_help_rig"/>
+                </paragraph>
+                <paragraph>
+                    <title text="$l10n_fm_help_driveTitle"/>
+                    <text text="$l10n_fm_help_drive"/>
+                </paragraph>
+                <paragraph>
+                    <title text="$l10n_fm_help_configTitle"/>
+                    <text text="$l10n_fm_help_config"/>
+                </paragraph>
+            </page>
+        </category>
+    </helpLines>
+
+    <l10n>
+        <text name="input_FOLGEMIR_TOGGLE">
+            <de>Folge mir: Fahrzeug an/aus</de>
+            <en>Follow me: vehicle on/off</en>
+            <fr>Suis moi : véhicule oui/non</fr>
+        </text>
+        <text name="input_FOLGEMIR_UEBERGABE">
+            <de>Folge mir: Reihe übergeben</de>
+            <en>Follow me: hand over the line</en>
+            <fr>Suis moi : transmettre la file</fr>
+        </text>
+        <text name="input_FOLGEMIR_STOPP">
+            <de>Folge mir: alle anhalten</de>
+            <en>Follow me: stop all</en>
+            <fr>Suis moi : tout arrêter</fr>
+        </text>
+
+        <text name="fm_endeLeer">
+            <de>Fahrer ist nicht mehr im Spiel - Folgen beendet.</de>
+            <en>The driver has left the game - following stopped.</en>
+            <fr>Le conducteur a quitté la partie - suivi arrêté.</fr>
+        </text>
+        <text name="fm_zuViele">
+            <de>Mehr Fahrzeuge nimmt die Reihe nicht auf.</de>
+            <en>The line will not take any more vehicles.</en>
+            <fr>La file ne peut pas accueillir plus de véhicules.</fr>
+        </text>
+        <text name="fm_keinMitspieler">
+            <de>Kein Mitspieler in der Nähe, dem du die Reihe geben könntest.</de>
+            <en>No other player nearby to hand the line over to.</en>
+            <fr>Aucun autre joueur à proximité pour reprendre la file.</fr>
+        </text>
+        <text name="fm_uebergeben">
+            <de>Reihe übergeben an:</de>
+            <en>Line handed over to:</en>
+            <fr>File transmise à :</fr>
+        </text>
+        <text name="fm_uebergebenOhne">
+            <de>Reihe übergeben.</de>
+            <en>Line handed over.</en>
+            <fr>File transmise.</fr>
+        </text>
+        <text name="fm_bekommen">
+            <de>Dir folgt jetzt ein weiteres Fahrzeug.</de>
+            <en>Another vehicle is following you now.</en>
+            <fr>Un véhicule de plus vous suit désormais.</fr>
+        </text>
+        <text name="fm_startKette">
+            <de>Fahrzeug hängt sich hinten an.</de>
+            <en>Vehicle joins the back of the line.</en>
+            <fr>Le véhicule se place en fin de file.</fr>
+        </text>
+        <text name="fm_start">
+            <de>Fahrzeug folgt dir jetzt.</de>
+            <en>The vehicle is following you now.</en>
+            <fr>Le véhicule vous suit à présent.</fr>
+        </text>
+        <text name="fm_stopp">
+            <de>Fahrzeug folgt dir nicht mehr.</de>
+            <en>The vehicle stopped following you.</en>
+            <fr>Le véhicule ne vous suit plus.</fr>
+        </text>
+        <text name="fm_keins">
+            <de>Kein passendes Fahrzeug in der Nähe.</de>
+            <en>No suitable vehicle nearby.</en>
+            <fr>Aucun véhicule approprié à proximité.</fr>
+        </text>
+        <text name="fm_nurImFahrzeug">
+            <de>Dazu musst du selbst in einem Fahrzeug sitzen.</de>
+            <en>You need to be in a vehicle yourself for this.</en>
+            <fr>Vous devez être vous-même dans un véhicule.</fr>
+        </text>
+        <text name="fm_alleStopp">
+            <de>Alle Fahrzeuge angehalten.</de>
+            <en>All vehicles stopped.</en>
+            <fr>Tous les véhicules sont arrêtés.</fr>
+        </text>
+        <text name="fm_keineFolger">
+            <de>Dir folgt gerade kein Fahrzeug.</de>
+            <en>No vehicle is following you.</en>
+            <fr>Aucun véhicule ne vous suit actuellement.</fr>
+        </text>
+        <text name="fm_hud">
+            <de>Folgen dir:</de>
+            <en>Following you:</en>
+            <fr>Vous suivent :</fr>
+        </text>
+
+        <text name="fm_endeZielWeg">
+            <de>Vorderes Fahrzeug nicht mehr vorhanden - Folgen beendet.</de>
+            <en>The vehicle in front is gone - following ended.</en>
+            <fr>Le véhicule de tête a disparu - suivi terminé.</fr>
+        </text>
+        <text name="fm_endeBesetzt">
+            <de>Fahrzeug wurde bestiegen - Folgen beendet.</de>
+            <en>Vehicle was entered - following ended.</en>
+            <fr>Quelqu'un est monté dans le véhicule - suivi terminé.</fr>
+        </text>
+        <text name="fm_endeMotor">
+            <de>Motor kann nicht laufen - Folgen beendet.</de>
+            <en>Engine cannot run - following ended.</en>
+            <fr>Le moteur ne peut pas tourner - suivi terminé.</fr>
+        </text>
+        <text name="fm_endeZuWeit">
+            <de>Zu weit entfernt - Folgen beendet.</de>
+            <en>Too far away - following ended.</en>
+            <fr>Trop éloigné - suivi terminé.</fr>
+        </text>
+        <text name="fm_endeFest">
+            <de>Fahrzeug steckt fest - Folgen beendet.</de>
+            <en>Vehicle is stuck - following ended.</en>
+            <fr>Le véhicule est bloqué - suivi terminé.</fr>
+        </text>
+
+        <text name="fm_help_category">
+            <de>Folge Mir</de>
+            <en>Follow Me</en>
+            <fr>Suis Moi</fr>
+        </text>
+        <text name="fm_help_pageTitle">
+            <de>Fahrzeug folgen lassen</de>
+            <en>Making a vehicle follow you</en>
+            <fr>Faire suivre un véhicule</fr>
+        </text>
+        <text name="fm_help_intro">
+            <de>Ein Fahrzeug fährt deinem Fahrzeug automatisch hinterher. Im Multiplayer sehen alle Mitspieler dasselbe, gefahren wird auf dem Server.</de>
+            <en>A vehicle drives behind your own vehicle automatically. In multiplayer everyone sees the same thing, the driving happens on the server.</en>
+            <fr>Un véhicule suit automatiquement le vôtre. En multijoueur, tous voient la même chose, la conduite est calculée sur le serveur.</fr>
+        </text>
+        <text name="fm_help_keysTitle">
+            <de>Bedienung</de>
+            <en>Controls</en>
+            <fr>Commandes</fr>
+        </text>
+        <text name="fm_help_keys">
+            <de>Du sitzt selbst am Steuer und fährst an das Fahrzeug heran, das folgen soll. STRG + H schickt es los. Jedes weitere Fahrzeug hängt sich hinten an die Reihe und folgt dem Fahrzeug davor. Steht keines mehr frei in der Nähe, hält derselbe Tastendruck den nächsten Folger an. STRG + SHIFT + H hält alle an. STRG + J gibt die ganze Reihe an einen Mitspieler ab, neben dem du stehst - ab dann fährt sie hinter ihm her. Steigst du in ein folgendes Fahrzeug ein, fährst du wieder selbst. Zu Fuß lässt sich die Funktion nicht auslösen. STRG + H und STRG + SHIFT + H sind nur die Vorgabe: bei einer Doppelbelegung oder wenn nichts passiert, die Tasten in den Einstellungen unter Tastenbelegung beim Eintrag Folge mir neu vergeben.</de>
+            <en>You are behind the wheel yourself and pull up next to the vehicle that should follow. CTRL + H sends it off. Every additional vehicle joins the back of the line and follows the one in front of it. If none is free nearby, the same key stops the nearest follower. CTRL + SHIFT + H stops all of them. CTRL + J hands the whole line over to another player you are standing next to, and it follows them from then on. Entering a following vehicle hands control back to you. The function cannot be triggered on foot. CTRL + H and CTRL + SHIFT + H are only the default: in case of a conflict, or if nothing happens, reassign the keys under Settings, Controls at the entry Follow me.</en>
+            <fr>Vous êtes au volant et vous approchez du véhicule qui doit suivre. CTRL + H le met en route. Chaque véhicule supplémentaire se place en fin de file et suit celui qui le précède. Si aucun n'est libre à proximité, la même touche arrête le suiveur le plus proche. CTRL + MAJ + H les arrête tous. CTRL + J transmet toute la file à un joueur à côté duquel vous vous trouvez : elle le suit ensuite. En montant dans un véhicule qui suit, vous reprenez les commandes. À pied, la fonction ne se déclenche pas. CTRL + H et CTRL + MAJ + H ne sont que les valeurs par défaut : en cas de conflit, ou si rien ne se passe, réattribuez les touches dans Paramètres, Commandes, entrée Suis moi.</fr>
+        </text>
+        <text name="fm_help_rigTitle">
+            <de>Anbaugeräte und Anhänger</de>
+            <en>Implements and trailers</en>
+            <fr>Outils et remorques</fr>
+        </text>
+        <text name="fm_help_rig">
+            <de>Das Gespann bleibt, wie du es vorbereitet hast - nichts wird abgehängt, eingeklappt oder angehoben. Die Länge beider Gespanne zählt beim Abstand mit, der eingestellte Wert ist die Lücke zwischen Heck und Front.</de>
+            <en>The combination stays as you prepared it - nothing is detached, folded or raised. The length of both combinations counts towards the distance, the configured value is the gap between rear and front end.</en>
+            <fr>L'attelage reste tel que vous l'avez préparé : rien n'est dételé, replié ni relevé. La longueur des deux attelages compte dans la distance, la valeur réglée est l'espace entre l'arrière et l'avant.</fr>
+        </text>
+        <text name="fm_help_driveTitle">
+            <de>Wie gefahren wird</de>
+            <en>How it drives</en>
+            <fr>Comment il roule</fr>
+        </text>
+        <text name="fm_help_drive">
+            <de>Das Fahrzeug fährt deine Spur nach statt der Luftlinie und hält dabei Abstand. Es fährt nur vorwärts und sucht sich keinen Weg um Hindernisse. Bleibt es zu lange stehen, endet das Folgen von selbst.</de>
+            <en>The vehicle follows your track instead of the direct line and keeps its distance. It only drives forwards and does not search a way around obstacles. If it stands still for too long, following ends on its own.</en>
+            <fr>Le véhicule refait votre trajet au lieu de couper tout droit et garde ses distances. Il roule uniquement en marche avant et ne contourne pas les obstacles. S'il reste trop longtemps immobile, le suivi prend fin.</fr>
+        </text>
+        <text name="fm_help_configTitle">
+            <de>Einstellungen</de>
+            <en>Settings</en>
+            <fr>Réglages</fr>
+        </text>
+        <text name="fm_help_config">
+            <de>Abstand, Höchstgeschwindigkeit und Suchradius stehen in modSettings/FS25_FollowMe/settings.xml. Im Spiel zeigt der Konsolenbefehl fmInfo alle Werte, fmSet ändert einen und fmStopp hält alles an.</de>
+            <en>Distance, top speed and search radius are stored in modSettings/FS25_FollowMe/settings.xml. In game the console command fmInfo lists all values, fmSet changes one and fmStopp stops everything.</en>
+            <fr>La distance, la vitesse maximale et le rayon de recherche se trouvent dans modSettings/FS25_FollowMe/settings.xml. En jeu, fmInfo affiche toutes les valeurs, fmSet en modifie une et fmStopp arrête tout.</fr>
+        </text>
+    </l10n>
+</modDesc>
