@@ -10,7 +10,11 @@
     </title>
 
     <description>
-        <de><![CDATA[Ein Fahrzeug fährt deinem Fahrzeug automatisch hinterher - im Einzelspieler wie im Multiplayer.
+        <de><![CDATA[Entstanden ist die Mod aus einer ganz praktischen Not im eigenen Team. Wir wollten ein zweites Fahrzeug mit zum Feld nehmen, mehr nicht - und dafür war uns AutoDrive zu viel des Guten. Ein Streckennetz anzulegen, zu pflegen und im Kopf zu behalten lohnt sich, wenn man es ausreizt; für "fahr mir einfach hinterher" ist es ein großer Apparat. Also macht diese Mod genau das eine, und sonst nichts.
+
+Damit das von vornherein klar ist: Sie ist KEIN Ersatz für AutoDrive. Es gibt keine gespeicherten Strecken, keine Routenplanung, kein selbstständiges Fahren zum Hof und zurück, kein Be- oder Entladen, keine Aufträge. Nichts fährt ohne dich - du sitzt am Steuer, der Rest hängt sich an. Wer autonome Abläufe braucht, ist bei AutoDrive richtig und bleibt dort besser aufgehoben.
+
+Ein Fahrzeug fährt deinem Fahrzeug automatisch hinterher - im Einzelspieler wie im Multiplayer.
 
 So funktioniert es:
 - Du sitzt selbst am Steuer und fährst an das Fahrzeug heran, das folgen soll
@@ -36,7 +40,11 @@ Multiplayer: Gefahren wird auf dem Server, alle Mitspieler sehen dasselbe. Jeder
 Hinweis: Es wird nur vorwärts gefahren und es findet keine Wegsuche statt - in sehr engen Hofeinfahrten kann ein Gespann hängen bleiben. Bleibt das Fahrzeug zu lange stehen, beendet die Mod das Folgen von selbst.
 
 Script-Mod, daher nur für PC und Mac.]]></de>
-        <en><![CDATA[A vehicle drives behind your own vehicle automatically - in single player as well as multiplayer.
+        <en><![CDATA[This mod came out of a practical need in our own team. We wanted to take a second vehicle along to the field, nothing more - and for that, AutoDrive was more than we needed. Laying out a route network, maintaining it and keeping it in your head pays off if you make full use of it; for "just drive behind me" it is a big apparatus. So this mod does that one thing, and nothing else.
+
+To be clear from the start: it is NOT a replacement for AutoDrive. There are no saved routes, no route planning, no driving to the farm and back on its own, no loading or unloading, no jobs. Nothing moves without you - you are at the wheel, the rest falls in behind. If you need autonomous workflows, AutoDrive is the right place and you are better off there.
+
+A vehicle drives behind your own vehicle automatically - in single player as well as multiplayer.
 
 How it works:
 - You are behind the wheel yourself and pull up next to the vehicle that should follow
@@ -62,7 +70,11 @@ Multiplayer: driving happens on the server, everyone sees the same thing. A play
 Note: the vehicle only drives forwards and there is no path finding - in very tight farm entrances a combination may get stuck. If a vehicle stands still for too long, the mod ends the following on its own.
 
 Script mod, therefore PC and Mac only.]]></en>
-        <fr><![CDATA[Un véhicule suit automatiquement le vôtre - en solo comme en multijoueur.
+        <fr><![CDATA[Ce mod est né d'un besoin concret au sein de notre équipe. Nous voulions emmener un deuxième véhicule au champ, rien de plus - et pour cela, AutoDrive nous paraissait démesuré. Créer un réseau d'itinéraires, l'entretenir et le garder en tête vaut la peine quand on l'exploite à fond ; pour « suis-moi, tout simplement », c'est une grosse machinerie. Ce mod fait donc cette seule chose, et rien d'autre.
+
+Que ce soit clair dès le départ : ce n'est PAS un remplacement d'AutoDrive. Pas d'itinéraires enregistrés, pas de planification de trajet, aucun déplacement autonome vers la ferme et retour, ni chargement ni déchargement, pas de missions. Rien ne roule sans vous - vous êtes au volant, le reste se met en file. Si vous avez besoin de processus autonomes, AutoDrive est le bon choix et vous y serez mieux.
+
+Un véhicule suit automatiquement le vôtre - en solo comme en multijoueur.
 
 Fonctionnement :
 - Vous êtes vous-même au volant et vous approchez du véhicule qui doit suivre
