@@ -31,7 +31,7 @@ Multiplayer: Gefahren wird auf dem Server, alle Mitspieler sehen dasselbe. Jeder
 
 Hinweis: Es wird nur vorwärts gefahren und es findet keine Wegsuche statt - in sehr engen Hofeinfahrten kann ein Gespann hängen bleiben. Bleibt das Fahrzeug zu lange stehen, beendet die Mod das Folgen von selbst.
 
-Wer mein Mitspieler HUD nutzt, sieht dort nebenbei, welches Fahrzeug gerade wem folgt. Nötig ist es nicht - die beiden Mods kennen sich nur, wenn ohnehin beide geladen sind.
+Wer mein Coworker HUD nutzt, sieht dort nebenbei, welches Fahrzeug gerade wem folgt. Nötig ist es nicht - die beiden Mods kennen sich nur, wenn ohnehin beide geladen sind.
 
 Script-Mod, daher nur für PC und Mac.
 
@@ -46,7 +46,7 @@ Auf einem Dedicated Server gehoert sie in dessen Mods-Ordner.
 
 ## Stand
 
-Version 1.0.2.0, gebaut gegen descVersion 116.
+Version 1.0.3.0, gebaut gegen descVersion 116.
 
 ## Lizenz
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="116" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
     <author>OGW</author>
-    <version>1.0.2.0</version>
+    <version>1.0.3.0</version>
 
     <title>
         <de>Spurfolger</de>
@@ -39,7 +39,7 @@ Multiplayer: Gefahren wird auf dem Server, alle Mitspieler sehen dasselbe. Jeder
 
 Hinweis: Es wird nur vorwärts gefahren und es findet keine Wegsuche statt - in sehr engen Hofeinfahrten kann ein Gespann hängen bleiben. Bleibt das Fahrzeug zu lange stehen, beendet die Mod das Folgen von selbst.
 
-Wer mein Mitspieler HUD nutzt, sieht dort nebenbei, welches Fahrzeug gerade wem folgt. Nötig ist es nicht - die beiden Mods kennen sich nur, wenn ohnehin beide geladen sind.
+Wer mein Coworker HUD nutzt, sieht dort nebenbei, welches Fahrzeug gerade wem folgt. Nötig ist es nicht - die beiden Mods kennen sich nur, wenn ohnehin beide geladen sind.
 
 Script-Mod, daher nur für PC und Mac.]]></de>
         <en><![CDATA[This mod came out of a practical need in our own team. We wanted to take a second vehicle along to the field, nothing more - and for that, AutoDrive was more than we needed. Laying out a route network, maintaining it and keeping it in your head pays off if you make full use of it; for "just drive behind me" it is a big apparatus. So this mod does that one thing, and nothing else.
@@ -103,7 +103,7 @@ Multijoueur : la conduite est calculée sur le serveur, tous les joueurs voient 
 
 Remarque : le véhicule roule uniquement en marche avant et ne calcule pas d'itinéraire - dans une entrée de ferme très étroite, un attelage peut rester bloqué. Si le véhicule reste trop longtemps immobile, le mod met fin au suivi de lui-même.
 
-Si vous utilisez aussi mon HUD Coéquipiers, il indique au passage quel véhicule suit qui. Ce n'est pas obligatoire : les deux mods ne se reconnaissent que si les deux sont chargés.
+Si vous utilisez aussi mon Coworker HUD, il indique au passage quel véhicule suit qui. Ce n'est pas obligatoire : les deux mods ne se reconnaissent que si les deux sont chargés.
 
 Mod de script, donc uniquement pour PC et Mac.]]></fr>
     </description>
