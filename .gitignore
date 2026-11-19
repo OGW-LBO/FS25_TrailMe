@@ -7,3 +7,4 @@ veroeffentlichung_*.txt
 *.bak
 *.tmp
 __pycache__/
+screenshots/

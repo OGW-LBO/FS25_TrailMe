@@ -2,6 +2,10 @@
 
 Ein Fahrzeug folgt dem Spieler auf dessen eigener Spur.
 
+Entstanden ist die Mod aus einer ganz praktischen Not im eigenen Team. Wir wollten ein zweites Fahrzeug mit zum Feld nehmen, mehr nicht - und dafür war uns AutoDrive zu viel des Guten. Ein Streckennetz anzulegen, zu pflegen und im Kopf zu behalten lohnt sich, wenn man es ausreizt; für "fahr mir einfach hinterher" ist es ein großer Apparat. Also macht diese Mod genau das eine, und sonst nichts.
+
+**Sie ist kein Ersatz für AutoDrive.** Es gibt keine gespeicherten Strecken, keine Routenplanung, kein selbstständiges Fahren zum Hof und zurück, kein Be- oder Entladen, keine Aufträge. Nichts fährt ohne dich - du sitzt am Steuer, der Rest hängt sich an. Wer autonome Abläufe braucht, ist bei AutoDrive richtig und bleibt dort besser aufgehoben.
+
 Ein Fahrzeug fährt deinem Fahrzeug automatisch hinterher - im Einzelspieler wie im Multiplayer.
 
 So funktioniert es:
