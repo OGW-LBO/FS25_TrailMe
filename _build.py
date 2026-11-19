@@ -1,4 +1,4 @@
-"""Build FS25_FollowMe.
+"""Build FS25_TrailMe.
 
 Zeichnet das Mod-Icon (512x512 DXT1 ohne Mipmaps, ModHub-/TestRunner-konform),
 prueft modDesc.xml und packt die ZIP. Es werden nur .xml/.lua/.dds gepackt.
@@ -17,8 +17,8 @@ from PIL import Image, ImageDraw
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-MOD_NAME = "FS25_FollowMe"
-ICON = "icon_FollowMe.dds"
+MOD_NAME = "FS25_TrailMe"
+ICON = "icon_TrailMe.dds"
 DATEIEN = [
     "modDesc.xml",
     "FolgeMirMain.lua",

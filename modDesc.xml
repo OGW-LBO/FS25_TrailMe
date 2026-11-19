@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="116" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
     <author>OGW</author>
-    <version>1.0.0.0</version>
+    <version>1.0.1.0</version>
 
     <title>
-        <de>Folge Mir</de>
-        <en>Follow Me</en>
-        <fr>Suis Moi</fr>
+        <de>Spurfolger</de>
+        <en>Trail Me</en>
+        <fr>Sur Ma Trace</fr>
     </title>
 
     <description>
@@ -25,7 +25,7 @@ So funktioniert es:
 - STRG + SHIFT + H: Alle Fahrzeuge, die dir folgen, halten an
 - Steigst du in ein folgendes Fahrzeug ein, übernimmst du wieder selbst
 
-Zur Tastenbelegung: STRG + H und STRG + SHIFT + H sind nur die Vorgabe. Nutzt eine andere Mod dieselbe Kombination, meldet das Spiel beim Start eine Doppelbelegung - dann in den Einstellungen unter Tastenbelegung nach "Folge mir" suchen und eine freie Taste vergeben. Dasselbe gilt, wenn gar nichts passiert: hat die Aktion dort keine Taste, greift die Vorgabe aus der Mod nicht mehr und du musst einmal selbst belegen.
+Zur Tastenbelegung: STRG + H und STRG + SHIFT + H sind nur die Vorgabe. Nutzt eine andere Mod dieselbe Kombination, meldet das Spiel beim Start eine Doppelbelegung - dann in den Einstellungen unter Tastenbelegung nach "Spurfolger" suchen und eine freie Taste vergeben. Dasselbe gilt, wenn gar nichts passiert: hat die Aktion dort keine Taste, greift die Vorgabe aus der Mod nicht mehr und du musst einmal selbst belegen.
 
 Das Gespann bleibt, wie du es vorbereitet hast. Anbaugeräte und Anhänger werden weder abgehängt noch eingeklappt oder angehoben - der Folger zieht sein komplettes Gespann mit. Für den Abstand wird die tatsächliche Länge beider Gespanne mitgerechnet, der eingestellte Wert ist also die Lücke zwischen dem Heck vor dir und der Front dahinter. Bei einem langen Häcksler oder Anhängerzug macht das mehrere Meter aus.
 
@@ -33,7 +33,7 @@ Das Fahrzeug fährt nicht auf Luftlinie, sondern auf deiner Spur: Es merkt sich 
 
 Einem Spieler zu Fuß folgt bewusst nichts - die Funktion lässt sich nur am Steuer auslösen.
 
-Einstellbar sind Abstand, Höchstgeschwindigkeit, Suchradius und die Höchstzahl der Fahrzeuge in einer Reihe. Die Werte stehen in "modSettings/FS25_FollowMe/settings.xml" und lassen sich im Spiel über die Konsole ändern: "fmInfo" zeigt alle Werte, "fmSet <name> <wert>" setzt einen, "fmStopp" hält alles an.
+Einstellbar sind Abstand, Höchstgeschwindigkeit, Suchradius und die Höchstzahl der Fahrzeuge in einer Reihe. Die Werte stehen in "modSettings/FS25_TrailMe/settings.xml" und lassen sich im Spiel über die Konsole ändern: "fmInfo" zeigt alle Werte, "fmSet <name> <wert>" setzt einen, "fmStopp" hält alles an.
 
 Multiplayer: Gefahren wird auf dem Server, alle Mitspieler sehen dasselbe. Jeder Spieler kann nur Fahrzeuge losschicken, auf die seine Farm Zugriff hat. Mit STRG + J gibst du deine ganze Reihe an einen Mitspieler ab, neben dem du stehst - praktisch, wenn er weiterfährt und du etwas anderes machst. Steigst du zwischendurch aus - Tor öffnen, tanken, kurz etwas anderes machen -, bleibt die Reihe stehen und wartet auf dich. Aufgelöst wird sie erst, wenn der Fahrer das Spiel verlassen hat. Serverbetreiber und Administratoren können mit dem Konsolenbefehl "fmStopp" alle Reihen auf einmal auflösen.
 
@@ -55,7 +55,7 @@ How it works:
 - CTRL + SHIFT + H: every vehicle following you comes to a halt
 - Entering a following vehicle hands control back to you
 
-On the key bindings: CTRL + H and CTRL + SHIFT + H are only the default. If another mod uses the same combination, the game reports a conflict at startup - look for "Follow me" under Settings, Controls and pick a free key. The same goes if nothing happens at all: once the action sits there without a key, the default from the mod no longer applies and you have to assign it yourself.
+On the key bindings: CTRL + H and CTRL + SHIFT + H are only the default. If another mod uses the same combination, the game reports a conflict at startup - look for "Trail Me" under Settings, Controls and pick a free key. The same goes if nothing happens at all: once the action sits there without a key, the default from the mod no longer applies and you have to assign it yourself.
 
 The combination stays exactly as you prepared it. Implements and trailers are never detached, folded or raised - the follower pulls its whole combination along. The actual length of both combinations is taken into account for the distance, so the configured value is the gap between the rear end in front of you and the front end behind. On a long forage harvester or a trailer train that makes several metres of difference.
 
@@ -63,7 +63,7 @@ The vehicle does not take the direct line, it follows your track: it records you
 
 Nothing follows a player on foot by design - the function can only be triggered from behind the wheel.
 
-Distance, top speed, search radius and the maximum number of vehicles in a line can be configured. The values live in "modSettings/FS25_FollowMe/settings.xml" and can be changed in game from the console: "fmInfo" lists all values, "fmSet <name> <value>" sets one, "fmStopp" stops everything.
+Distance, top speed, search radius and the maximum number of vehicles in a line can be configured. The values live in "modSettings/FS25_TrailMe/settings.xml" and can be changed in game from the console: "fmInfo" lists all values, "fmSet <name> <value>" sets one, "fmStopp" stops everything.
 
 Multiplayer: driving happens on the server, everyone sees the same thing. A player can only send out vehicles their farm has access to. CTRL + J hands your whole line over to another player you are standing next to - handy when they carry on and you do something else. If you get out for a moment - opening a gate, refuelling, doing something else - the line stays put and waits for you. It only breaks up once the driver has left the game. Server owners and admins can dissolve every line at once with the console command "fmStopp".
 
@@ -85,7 +85,7 @@ Fonctionnement :
 - CTRL + MAJ + H : tous les véhicules qui vous suivent s'arrêtent
 - En montant dans un véhicule qui vous suit, vous en reprenez les commandes
 
-À propos des touches : CTRL + H et CTRL + MAJ + H ne sont que les valeurs par défaut. Si un autre mod utilise la même combinaison, le jeu signale un conflit au démarrage - cherchez alors "Suis moi" dans Paramètres, Commandes et attribuez une touche libre. Idem si rien ne se passe : lorsque l'action y figure sans touche, la valeur par défaut du mod ne s'applique plus et vous devez l'attribuer vous-même.
+À propos des touches : CTRL + H et CTRL + MAJ + H ne sont que les valeurs par défaut. Si un autre mod utilise la même combinaison, le jeu signale un conflit au démarrage - cherchez alors "Sur ma trace" dans Paramètres, Commandes et attribuez une touche libre. Idem si rien ne se passe : lorsque l'action y figure sans touche, la valeur par défaut du mod ne s'applique plus et vous devez l'attribuer vous-même.
 
 L'attelage reste tel que vous l'avez préparé. Les outils et les remorques ne sont ni dételés, ni repliés, ni relevés - le suiveur emmène tout son attelage. La longueur réelle des deux attelages est prise en compte pour la distance : la valeur réglée correspond donc à l'espace entre l'arrière devant vous et l'avant derrière. Sur une ensileuse longue ou un train de remorques, cela représente plusieurs mètres.
 
@@ -93,7 +93,7 @@ Le véhicule ne coupe pas à travers champs : il enregistre votre trajet et le r
 
 Rien ne suit un joueur à pied, c'est voulu : la fonction ne se déclenche qu'au volant.
 
-La distance, la vitesse maximale, le rayon de recherche et le nombre maximal de véhicules par file se règlent. Les valeurs se trouvent dans "modSettings/FS25_FollowMe/settings.xml" et se modifient en jeu depuis la console : "fmInfo" affiche toutes les valeurs, "fmSet <nom> <valeur>" en modifie une, "fmStopp" arrête tout.
+La distance, la vitesse maximale, le rayon de recherche et le nombre maximal de véhicules par file se règlent. Les valeurs se trouvent dans "modSettings/FS25_TrailMe/settings.xml" et se modifient en jeu depuis la console : "fmInfo" affiche toutes les valeurs, "fmSet <nom> <valeur>" en modifie une, "fmStopp" arrête tout.
 
 Multijoueur : la conduite est calculée sur le serveur, tous les joueurs voient la même chose. Chaque joueur ne peut envoyer que les véhicules auxquels sa ferme a accès. CTRL + J transmet toute votre file à un joueur voisin - pratique lorsqu'il poursuit la route et que vous faites autre chose. Si vous descendez un instant - ouvrir un portail, faire le plein, faire autre chose -, la file reste en place et vous attend. Elle ne se défait que lorsque le conducteur a quitté la partie. Les administrateurs peuvent dissoudre toutes les files d'un coup avec la commande "fmStopp".
 
@@ -102,7 +102,7 @@ Remarque : le véhicule roule uniquement en marche avant et ne calcule pas d'iti
 Mod de script, donc uniquement pour PC et Mac.]]></fr>
     </description>
 
-    <iconFilename>icon_FollowMe.dds</iconFilename>
+    <iconFilename>icon_TrailMe.dds</iconFilename>
 
     <multiplayer supported="true"/>
 
@@ -161,19 +161,19 @@ Mod de script, donc uniquement pour PC et Mac.]]></fr>
 
     <l10n>
         <text name="input_FOLGEMIR_TOGGLE">
-            <de>Folge mir: Fahrzeug an/aus</de>
-            <en>Follow me: vehicle on/off</en>
-            <fr>Suis moi : véhicule oui/non</fr>
+            <de>Spurfolger: Fahrzeug an/aus</de>
+            <en>Trail Me: vehicle on/off</en>
+            <fr>Sur ma trace : véhicule oui/non</fr>
         </text>
         <text name="input_FOLGEMIR_UEBERGABE">
-            <de>Folge mir: Reihe übergeben</de>
-            <en>Follow me: hand over the line</en>
-            <fr>Suis moi : transmettre la file</fr>
+            <de>Spurfolger: Reihe übergeben</de>
+            <en>Trail Me: hand over the line</en>
+            <fr>Sur ma trace : transmettre la file</fr>
         </text>
         <text name="input_FOLGEMIR_STOPP">
-            <de>Folge mir: alle anhalten</de>
-            <en>Follow me: stop all</en>
-            <fr>Suis moi : tout arrêter</fr>
+            <de>Spurfolger: alle anhalten</de>
+            <en>Trail Me: stop all</en>
+            <fr>Sur ma trace : tout arrêter</fr>
         </text>
 
         <text name="fm_endeLeer">
@@ -274,9 +274,9 @@ Mod de script, donc uniquement pour PC et Mac.]]></fr>
         </text>
 
         <text name="fm_help_category">
-            <de>Folge Mir</de>
-            <en>Follow Me</en>
-            <fr>Suis Moi</fr>
+            <de>Spurfolger</de>
+            <en>Trail Me</en>
+            <fr>Sur Ma Trace</fr>
         </text>
         <text name="fm_help_pageTitle">
             <de>Fahrzeug folgen lassen</de>
@@ -294,9 +294,9 @@ Mod de script, donc uniquement pour PC et Mac.]]></fr>
             <fr>Commandes</fr>
         </text>
         <text name="fm_help_keys">
-            <de>Du sitzt selbst am Steuer und fährst an das Fahrzeug heran, das folgen soll. STRG + H schickt es los. Jedes weitere Fahrzeug hängt sich hinten an die Reihe und folgt dem Fahrzeug davor. Steht keines mehr frei in der Nähe, hält derselbe Tastendruck den nächsten Folger an. STRG + SHIFT + H hält alle an. STRG + J gibt die ganze Reihe an einen Mitspieler ab, neben dem du stehst - ab dann fährt sie hinter ihm her. Steigst du in ein folgendes Fahrzeug ein, fährst du wieder selbst. Zu Fuß lässt sich die Funktion nicht auslösen. STRG + H und STRG + SHIFT + H sind nur die Vorgabe: bei einer Doppelbelegung oder wenn nichts passiert, die Tasten in den Einstellungen unter Tastenbelegung beim Eintrag Folge mir neu vergeben.</de>
-            <en>You are behind the wheel yourself and pull up next to the vehicle that should follow. CTRL + H sends it off. Every additional vehicle joins the back of the line and follows the one in front of it. If none is free nearby, the same key stops the nearest follower. CTRL + SHIFT + H stops all of them. CTRL + J hands the whole line over to another player you are standing next to, and it follows them from then on. Entering a following vehicle hands control back to you. The function cannot be triggered on foot. CTRL + H and CTRL + SHIFT + H are only the default: in case of a conflict, or if nothing happens, reassign the keys under Settings, Controls at the entry Follow me.</en>
-            <fr>Vous êtes au volant et vous approchez du véhicule qui doit suivre. CTRL + H le met en route. Chaque véhicule supplémentaire se place en fin de file et suit celui qui le précède. Si aucun n'est libre à proximité, la même touche arrête le suiveur le plus proche. CTRL + MAJ + H les arrête tous. CTRL + J transmet toute la file à un joueur à côté duquel vous vous trouvez : elle le suit ensuite. En montant dans un véhicule qui suit, vous reprenez les commandes. À pied, la fonction ne se déclenche pas. CTRL + H et CTRL + MAJ + H ne sont que les valeurs par défaut : en cas de conflit, ou si rien ne se passe, réattribuez les touches dans Paramètres, Commandes, entrée Suis moi.</fr>
+            <de>Du sitzt selbst am Steuer und fährst an das Fahrzeug heran, das folgen soll. STRG + H schickt es los. Jedes weitere Fahrzeug hängt sich hinten an die Reihe und folgt dem Fahrzeug davor. Steht keines mehr frei in der Nähe, hält derselbe Tastendruck den nächsten Folger an. STRG + SHIFT + H hält alle an. STRG + J gibt die ganze Reihe an einen Mitspieler ab, neben dem du stehst - ab dann fährt sie hinter ihm her. Steigst du in ein folgendes Fahrzeug ein, fährst du wieder selbst. Zu Fuß lässt sich die Funktion nicht auslösen. STRG + H und STRG + SHIFT + H sind nur die Vorgabe: bei einer Doppelbelegung oder wenn nichts passiert, die Tasten in den Einstellungen unter Tastenbelegung beim Eintrag Spurfolger neu vergeben.</de>
+            <en>You are behind the wheel yourself and pull up next to the vehicle that should follow. CTRL + H sends it off. Every additional vehicle joins the back of the line and follows the one in front of it. If none is free nearby, the same key stops the nearest follower. CTRL + SHIFT + H stops all of them. CTRL + J hands the whole line over to another player you are standing next to, and it follows them from then on. Entering a following vehicle hands control back to you. The function cannot be triggered on foot. CTRL + H and CTRL + SHIFT + H are only the default: in case of a conflict, or if nothing happens, reassign the keys under Settings, Controls at the entry Trail Me.</en>
+            <fr>Vous êtes au volant et vous approchez du véhicule qui doit suivre. CTRL + H le met en route. Chaque véhicule supplémentaire se place en fin de file et suit celui qui le précède. Si aucun n'est libre à proximité, la même touche arrête le suiveur le plus proche. CTRL + MAJ + H les arrête tous. CTRL + J transmet toute la file à un joueur à côté duquel vous vous trouvez : elle le suit ensuite. En montant dans un véhicule qui suit, vous reprenez les commandes. À pied, la fonction ne se déclenche pas. CTRL + H et CTRL + MAJ + H ne sont que les valeurs par défaut : en cas de conflit, ou si rien ne se passe, réattribuez les touches dans Paramètres, Commandes, entrée Sur ma trace.</fr>
         </text>
         <text name="fm_help_rigTitle">
             <de>Anbaugeräte und Anhänger</de>
@@ -324,9 +324,9 @@ Mod de script, donc uniquement pour PC et Mac.]]></fr>
             <fr>Réglages</fr>
         </text>
         <text name="fm_help_config">
-            <de>Abstand, Höchstgeschwindigkeit und Suchradius stehen in modSettings/FS25_FollowMe/settings.xml. Im Spiel zeigt der Konsolenbefehl fmInfo alle Werte, fmSet ändert einen und fmStopp hält alles an.</de>
-            <en>Distance, top speed and search radius are stored in modSettings/FS25_FollowMe/settings.xml. In game the console command fmInfo lists all values, fmSet changes one and fmStopp stops everything.</en>
-            <fr>La distance, la vitesse maximale et le rayon de recherche se trouvent dans modSettings/FS25_FollowMe/settings.xml. En jeu, fmInfo affiche toutes les valeurs, fmSet en modifie une et fmStopp arrête tout.</fr>
+            <de>Abstand, Höchstgeschwindigkeit und Suchradius stehen in modSettings/FS25_TrailMe/settings.xml. Im Spiel zeigt der Konsolenbefehl fmInfo alle Werte, fmSet ändert einen und fmStopp hält alles an.</de>
+            <en>Distance, top speed and search radius are stored in modSettings/FS25_TrailMe/settings.xml. In game the console command fmInfo lists all values, fmSet changes one and fmStopp stops everything.</en>
+            <fr>La distance, la vitesse maximale et le rayon de recherche se trouvent dans modSettings/FS25_TrailMe/settings.xml. En jeu, fmInfo affiche toutes les valeurs, fmSet en modifie une et fmStopp arrête tout.</fr>
         </text>
     </l10n>
 </modDesc>
