@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="116" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
     <author>OGW</author>
-    <version>1.0.1.0</version>
+    <version>1.0.2.0</version>
 
     <title>
         <de>Spurfolger</de>
@@ -252,6 +252,11 @@ Mod de script, donc uniquement pour PC et Mac.]]></fr>
             <en>Following you:</en>
             <fr>Vous suivent :</fr>
         </text>
+        <text name="fm_hudEiner">
+            <de>Folgt dir:</de>
+            <en>Following you:</en>
+            <fr>Vous suit :</fr>
+        </text>
 
         <text name="fm_endeZielWeg">
             <de>Vorderes Fahrzeug nicht mehr vorhanden - Folgen beendet.</de>
@@ -330,9 +335,9 @@ Mod de script, donc uniquement pour PC et Mac.]]></fr>
             <fr>Réglages</fr>
         </text>
         <text name="fm_help_config">
-            <de>Abstand, Höchstgeschwindigkeit und Suchradius stehen in modSettings/FS25_TrailMe/settings.xml. Im Spiel zeigt der Konsolenbefehl fmInfo alle Werte, fmSet ändert einen und fmStopp hält alles an.</de>
-            <en>Distance, top speed and search radius are stored in modSettings/FS25_TrailMe/settings.xml. In game the console command fmInfo lists all values, fmSet changes one and fmStopp stops everything.</en>
-            <fr>La distance, la vitesse maximale et le rayon de recherche se trouvent dans modSettings/FS25_TrailMe/settings.xml. En jeu, fmInfo affiche toutes les valeurs, fmSet en modifie une et fmStopp arrête tout.</fr>
+            <de>Abstand, Höchstgeschwindigkeit und Suchradius stehen in modSettings/FS25_TrailMe/settings.xml. Im Spiel zeigt der Konsolenbefehl fmInfo alle Werte, fmSet ändert einen und fmStopp hält alles an. Die Zeile mit den Folgern sitzt oben rechts unter der Info-Leiste. Mit fmSet hudAnzeigen 0 ist sie aus, mit 2 steht sie wieder frei an der Stelle aus hudX und hudY.</de>
+            <en>Distance, top speed and search radius are stored in modSettings/FS25_TrailMe/settings.xml. In game the console command fmInfo lists all values, fmSet changes one and fmStopp stops everything. The line listing the followers sits in the top right corner, below the info bar. fmSet hudAnzeigen 0 turns it off, 2 puts it back to the free position from hudX and hudY.</en>
+            <fr>La distance, la vitesse maximale et le rayon de recherche se trouvent dans modSettings/FS25_TrailMe/settings.xml. En jeu, fmInfo affiche toutes les valeurs, fmSet en modifie une et fmStopp arrête tout. La ligne des suiveurs s'affiche en haut à droite, sous la barre d'informations. fmSet hudAnzeigen 0 la masque, 2 la replace librement selon hudX et hudY.</fr>
         </text>
     </l10n>
 </modDesc>

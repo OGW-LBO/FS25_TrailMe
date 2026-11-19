@@ -53,7 +53,8 @@ FolgeMirMain.einstellungen = {
     leerlaufSekunden  = 120,   -- so lange darf der Fahrer weg sein, bevor
                                -- die Reihe sich aufloest (nur, wenn er das
                                -- Spiel verlassen hat)
-    hudAnzeigen       = 1,     -- 1 = kleine Anzeige, 0 = aus
+    hudAnzeigen       = 1,     -- 0 = aus, 1 = oben rechts am Spiel-HUD,
+                               -- 2 = frei ueber hudX und hudY
     hudX              = 0.015,
     hudY              = 0.30
 }
@@ -66,7 +67,7 @@ FolgeMirMain.grenzen = {
     maxZielentfernung = { 50,  800 },
     maxFolger         = { 1,    10 },
     leerlaufSekunden  = { 10, 1800 },
-    hudAnzeigen       = { 0,     1 },
+    hudAnzeigen       = { 0,     2 },
     hudX              = { 0,     1 },
     hudY              = { 0,     1 }
 }
@@ -943,6 +944,12 @@ end
 
 function FolgeMirMain:deleteMap()
     FolgeMirMain.folger = {}
+
+    -- Die Anzeige legt ihre Overlays erst beim ersten Zeichnen an. Das
+    -- Aufraeumen haengt deshalb weiter unten an der Tabelle.
+    if FolgeMirMain.anzeigeAufraeumen ~= nil then
+        FolgeMirMain.anzeigeAufraeumen()
+    end
 end
 
 function FolgeMirMain:mouseEvent(posX, posY, isDown, isUp, button)
@@ -994,8 +1001,226 @@ function FolgeMirMain:update(dt)
     fahrtakt(dt)
 end
 
+-- ============================================================================
+-- Bildschirmanzeige
+--
+-- Die Zeile haengt unter der Info-Leiste des Spiels und sieht aus wie dessen
+-- eigene Meldungen oben rechts. Masse und Lage kommen aus der Meldungsanzeige
+-- selbst - so macht die Zeile jede HUD-Groesse und jedes Seitenverhaeltnis
+-- mit, ohne dass hier Pixel nachgerechnet werden muessen.
+-- ============================================================================
+
+local meldungsanzeige = nil
+local anzeigeGesucht  = false
+local balken          = nil
+
+--- Die Meldungsanzeige des Spiels, oben rechts unter der Info-Leiste.
+local function getMeldungsanzeige()
+    if meldungsanzeige ~= nil then
+        return meldungsanzeige
+    end
+
+    if g_currentMission == nil or g_currentMission.hud == nil then
+        return nil
+    end
+
+    local hud = g_currentMission.hud
+    local sn  = hud.sideNotification
+
+    if type(sn) == "table" and type(sn.notificationQueue) == "table" then
+        meldungsanzeige = sn
+        return sn
+    end
+
+    -- Der Feldname steht in keiner Dokumentation. Sollte er einmal anders
+    -- heissen, lieber einmalig ueber den Inhalt suchen als aufgeben.
+    if not anzeigeGesucht then
+        anzeigeGesucht = true
+
+        for _, wert in pairs(hud) do
+            if type(wert) == "table" and type(wert.notificationQueue) == "table"
+                    and type(wert.bgRight) == "table" then
+                meldungsanzeige = wert
+                break
+            end
+        end
+    end
+
+    return meldungsanzeige
+end
+
+--- Der Hintergrundbalken: zwei runde Kappen und ein dehnbares Mittelstueck,
+--- dieselben Teile, aus denen das Spiel seine Meldungen zusammensetzt.
+local function getBalken()
+    if balken ~= nil then
+        return balken
+    end
+
+    if g_overlayManager == nil or g_overlayManager.createOverlay == nil then
+        return nil
+    end
+
+    -- Ist der Name nicht bekannt, kommt nil zurueck und es steht eine
+    -- Warnung in der log.txt - dann zeichnet die Anzeige eben ohne Balken.
+    local function hole(name)
+        local teil = g_overlayManager:createOverlay(name, 0, 0, 0, 0)
+
+        if type(teil) == "table" and teil.setPosition ~= nil then
+            return teil
+        end
+
+        return nil
+    end
+
+    local links  = hole("gui.rectangle_left")
+    local mitte  = hole("gui.rectangle_center")
+    local rechts = hole("gui.rectangle_right")
+
+    if links == nil or mitte == nil or rechts == nil then
+        return nil
+    end
+
+    local r, g, b, a = 0, 0, 0, 0.75
+
+    if HUD ~= nil and HUD.COLOR ~= nil and HUD.COLOR.BACKGROUND ~= nil then
+        r, g, b, a = unpack(HUD.COLOR.BACKGROUND)
+    end
+
+    links:setColor(r, g, b, a)
+    mitte:setColor(r, g, b, a)
+    rechts:setColor(r, g, b, a)
+
+    balken = { links = links, mitte = mitte, rechts = rechts }
+
+    return balken
+end
+
+--- Was in der Zeile steht. Folgt nur ein Fahrzeug, steht sein Name dort -
+--- eine blanke 1 sagt nicht, welches Gespann gerade unterwegs ist.
+local function anzeigeText(liste)
+    if #liste == 1 and liste[1] ~= nil and liste[1].getName ~= nil then
+        local name = liste[1]:getName()
+
+        if type(name) == "string" and name ~= "" then
+            return string.format("%s %s",
+                FolgeMirMain.text("fm_hudEiner", "Folgt dir:"), name)
+        end
+    end
+
+    return string.format("%s %d", FolgeMirMain.text("fm_hud", "Folgen dir:"), #liste)
+end
+
+--- Zeile unter der Info-Leiste. Gibt false zurueck, wenn sich die Anzeige des
+--- Spiels nicht fassen laesst - dann wird frei gezeichnet.
+local function zeichneAmHud(text)
+    local sn = getMeldungsanzeige()
+
+    if sn == nil or sn.getPosition == nil or type(sn.bgRight) ~= "table" then
+        return false
+    end
+
+    local rechtsX, obenY = sn:getPosition()
+
+    if type(rechtsX) ~= "number" or type(obenY) ~= "number" then
+        return false
+    end
+
+    local hoehe   = sn.bgRight.height
+    local kappe   = sn.bgRight.width
+    local groesse = sn.textSize
+
+    if type(hoehe) ~= "number" or hoehe <= 0 or type(kappe) ~= "number"
+            or type(groesse) ~= "number" or groesse <= 0 then
+        return false
+    end
+
+    local luft  = sn.notificationOffsetY or 0
+    local textY = sn.textOffsetY or 0
+
+    -- So viele Zeilen tiefer, wie das Spiel gerade selbst belegt. Sonst liegt
+    -- eine Meldung auf der Anzeige, und zwar ausgerechnet in dem Moment, in
+    -- dem das Folgen beginnt und "Fahrzeug folgt dir jetzt" erscheint.
+    local hoechstens = 3
+
+    if SideNotification ~= nil
+            and type(SideNotification.MAX_NOTIFICATIONS) == "number" then
+        hoechstens = SideNotification.MAX_NOTIFICATIONS
+    end
+
+    local belegt = math.min(#sn.notificationQueue, hoechstens)
+
+    if sn.isSaving == true then
+        belegt = belegt + 1
+    end
+
+    local y = obenY - (belegt + 1) * (hoehe + luft)
+
+    setTextBold(true)
+    setTextAlignment(RenderText.ALIGN_RIGHT)
+
+    local breite = getTextWidth(groesse, text)
+    local teile  = getBalken()
+
+    if teile ~= nil then
+        teile.rechts:setDimension(kappe, hoehe)
+        teile.rechts:setPosition(rechtsX - kappe, y)
+        teile.rechts:render()
+
+        teile.mitte:setDimension(breite, hoehe)
+        teile.mitte:setPosition(rechtsX - kappe - breite, y)
+        teile.mitte:render()
+
+        teile.links:setDimension(kappe, hoehe)
+        teile.links:setPosition(rechtsX - kappe - breite - kappe, y)
+        teile.links:render()
+    else
+        -- Ohne Balken braucht die Schrift einen Schatten, sonst verschwindet
+        -- sie ueber hellem Himmel.
+        setTextColor(0, 0, 0, 0.75)
+        renderText(rechtsX - kappe + 0.0015, y + textY - 0.0015, groesse, text)
+    end
+
+    setTextColor(0.26, 0.90, 0.36, 1)
+    renderText(rechtsX - kappe, y + textY, groesse, text)
+
+    return true
+end
+
+--- Die alte freie Position, ueber hudX und hudY einstellbar.
+local function zeichneFrei(text)
+    local e = FolgeMirMain.einstellungen
+
+    setTextBold(true)
+    setTextAlignment(RenderText.ALIGN_LEFT)
+
+    setTextColor(0, 0, 0, 0.75)
+    renderText(e.hudX + 0.0015, e.hudY - 0.0015, 0.016, text)
+
+    setTextColor(0.15, 0.85, 0.25, 1)
+    renderText(e.hudX, e.hudY, 0.016, text)
+end
+
+--- Beim Verlassen des Spielstands aufraeumen, damit beim naechsten Laden
+--- nicht auf Overlays von vorhin gezeigt wird.
+function FolgeMirMain.anzeigeAufraeumen()
+    if balken ~= nil then
+        for _, teil in pairs(balken) do
+            if teil.delete ~= nil then
+                teil:delete()
+            end
+        end
+    end
+
+    balken          = nil
+    meldungsanzeige = nil
+    anzeigeGesucht  = false
+end
+
 function FolgeMirMain:draw()
-    if FolgeMirMain.einstellungen.hudAnzeigen ~= 1 then
+    -- Der Wert kommt aus der settings.xml und ist dort eine Kommazahl
+    local modus = math.floor((FolgeMirMain.einstellungen.hudAnzeigen or 0) + 0.5)
+
+    if modus ~= 1 and modus ~= 2 then
         return
     end
 
@@ -1008,27 +1233,26 @@ function FolgeMirMain:draw()
         return
     end
 
+    -- Und nicht, wenn das Spiel-HUD ausgeblendet ist
+    if g_currentMission.hud ~= nil and g_currentMission.hud.isVisible == false then
+        return
+    end
+
     local liste = FolgeMirMain.getKette(FolgeMirMain.getMeinFahrzeug())
 
     if #liste == 0 then
         return
     end
 
-    local text = string.format("%s %d", FolgeMirMain.text("fm_hud", "Folgen dir:"), #liste)
+    local text = anzeigeText(liste)
 
-    setTextBold(true)
-    setTextAlignment(RenderText.ALIGN_LEFT)
-
-    -- Schatten, damit die Zeile auf hellem Hintergrund lesbar bleibt
-    setTextColor(0, 0, 0, 0.75)
-    renderText(FolgeMirMain.einstellungen.hudX + 0.0015,
-               FolgeMirMain.einstellungen.hudY - 0.0015, 0.016, text)
-
-    setTextColor(0.15, 0.85, 0.25, 1)
-    renderText(FolgeMirMain.einstellungen.hudX, FolgeMirMain.einstellungen.hudY, 0.016, text)
+    if modus == 2 or not zeichneAmHud(text) then
+        zeichneFrei(text)
+    end
 
     setTextColor(1, 1, 1, 1)
     setTextBold(false)
+    setTextAlignment(RenderText.ALIGN_LEFT)
 end
 
 addModEventListener(FolgeMirMain)
