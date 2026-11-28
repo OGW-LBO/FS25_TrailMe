@@ -24,6 +24,9 @@ DATEIEN = [
     "FolgeMirMain.lua",
     "FolgeMirVehicle.lua",
     "FolgeMirEvent.lua",
+    "FolgeMirMeldungEvent.lua",
+    "FolgeMirSettingsEvent.lua",
+    "FolgeMirMenu.lua",
     ICON,
 ]
 

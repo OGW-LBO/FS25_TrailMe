@@ -25,11 +25,13 @@ Das Fahrzeug fährt nicht auf Luftlinie, sondern auf deiner Spur: Es merkt sich 
 
 Einem Spieler zu Fuß folgt bewusst nichts - die Funktion lässt sich nur am Steuer auslösen.
 
-Einstellbar sind Abstand, Höchstgeschwindigkeit, Suchradius und die Höchstzahl der Fahrzeuge in einer Reihe. Die Werte stehen in "modSettings/FS25_TrailMe/settings.xml" und lassen sich im Spiel über die Konsole ändern: "fmInfo" zeigt alle Werte, "fmSet <name> <wert>" setzt einen, "fmStopp" hält alles an.
+Licht und Rundumleuchte macht der Folger an, wenn du deine anmachst - schaltest du für die Straße ein, leuchtet die ganze Reihe. Welche Scheinwerfer das sind, entscheidet das Fahrzeug selbst, genau wie bei den Helfern des Spiels. Wer es lieber an der Uhrzeit hat, stellt das Licht im Menü auf "bei Dunkelheit".
+
+Eingestellt wird im Spielmenü unter Einstellungen - Allgemein, ganz unten im Abschnitt "Spurfolger": Abstand, Höchstgeschwindigkeit, Reichweite, Suchradius, Fahrzeuge je Reihe, Zeit bis zum Aufgeben, Wartezeit, Licht und Rundumleuchte. Im Multiplayer gelten die Werte für den ganzen Server; ändern darf sie dort nur, wer als Administrator angemeldet ist, bei allen anderen stehen die Zeilen grau. Dieselben Werte liegen weiterhin in "modSettings/FS25_TrailMe/settings.xml" und lassen sich über die Konsole setzen: "fmInfo" zeigt alle, "fmSet <name> <wert>" ändert einen, "fmStopp" hält alles an.
 
 Multiplayer: Gefahren wird auf dem Server, alle Mitspieler sehen dasselbe. Jeder Spieler kann nur Fahrzeuge losschicken, auf die seine Farm Zugriff hat. Mit STRG + J gibst du deine ganze Reihe an einen Mitspieler ab, neben dem du stehst - praktisch, wenn er weiterfährt und du etwas anderes machst. Steigst du zwischendurch aus - Tor öffnen, tanken, kurz etwas anderes machen -, bleibt die Reihe stehen und wartet auf dich. Aufgelöst wird sie erst, wenn der Fahrer das Spiel verlassen hat. Serverbetreiber und Administratoren können mit dem Konsolenbefehl "fmStopp" alle Reihen auf einmal auflösen.
 
-Hinweis: Es wird nur vorwärts gefahren und es findet keine Wegsuche statt - in sehr engen Hofeinfahrten kann ein Gespann hängen bleiben. Bleibt das Fahrzeug zu lange stehen, beendet die Mod das Folgen von selbst.
+Hinweis: Es wird nur vorwärts gefahren und es findet keine Wegsuche statt - in sehr engen Hofeinfahrten kann ein Gespann hängen bleiben. Die Mod meldet sich, bevor etwas abreißt: wenn ein Folger nicht weiterkommt, wenn ihm der Sprit ausgeht, und wenn du ihm davonfährst. In den ersten beiden Fällen geht zusätzlich seine Rundumleuchte an, damit du siehst, welches Fahrzeug es ist. Wie lange er feststecken darf, bevor die Mod aufgibt, stellst du im Menü ein.
 
 Wer mein Coworker HUD nutzt, sieht dort nebenbei, welches Fahrzeug gerade wem folgt. Nötig ist es nicht - die beiden Mods kennen sich nur, wenn ohnehin beide geladen sind.
 
@@ -44,9 +46,24 @@ Mods-Ordner legen:
 
 Auf einem Dedicated Server gehoert sie in dessen Mods-Ordner.
 
+## Update von 1.0.3.0
+
+Ein neuer Spielstand ist nicht nötig, die Mod legt nichts im Savegame ab.
+Bestehende Einstellungen bleiben erhalten; die vier neuen - Zeit bis zum
+Aufgeben, Licht, Rundumleuchte und Spur einzeichnen - kommen mit ihrem
+Vorgabewert dazu. Die Tasten sind unverändert, eine neuere Spielversion
+braucht es nicht, und die ZIP heißt weiterhin `FS25_TrailMe.zip`, wird beim
+Kopieren also überschrieben.
+
+**Im Mehrspieler müssen Server und alle Mitspieler zusammen wechseln.** Es
+sind zwei Netzwerk-Ereignisse dazugekommen - für die Einstellungen und für
+die Hinweise -, und deren Kennungen vergibt der Server. Fährt jemand noch
+1.0.3.0, schreibt sein Spiel Fehler ins Log und die Einstellungen kommen bei
+ihm nicht an.
+
 ## Stand
 
-Version 1.0.3.0, gebaut gegen descVersion 116.
+Version 1.1.0.0, gebaut gegen descVersion 116.
 
 ## Discord
 

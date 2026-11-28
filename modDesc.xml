@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="116" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
     <author>OGW</author>
-    <version>1.0.3.0</version>
+    <version>1.1.0.0</version>
 
     <title>
         <de>Spurfolger</de>
@@ -33,11 +33,13 @@ Das Fahrzeug fährt nicht auf Luftlinie, sondern auf deiner Spur: Es merkt sich 
 
 Einem Spieler zu Fuß folgt bewusst nichts - die Funktion lässt sich nur am Steuer auslösen.
 
-Einstellbar sind Abstand, Höchstgeschwindigkeit, Suchradius und die Höchstzahl der Fahrzeuge in einer Reihe. Die Werte stehen in "modSettings/FS25_TrailMe/settings.xml" und lassen sich im Spiel über die Konsole ändern: "fmInfo" zeigt alle Werte, "fmSet <name> <wert>" setzt einen, "fmStopp" hält alles an.
+Licht und Rundumleuchte macht der Folger an, wenn du deine anmachst - schaltest du für die Straße ein, leuchtet die ganze Reihe. Welche Scheinwerfer das sind, entscheidet das Fahrzeug selbst, genau wie bei den Helfern des Spiels. Wer es lieber an der Uhrzeit hat, stellt das Licht im Menü auf "bei Dunkelheit".
+
+Eingestellt wird im Spielmenü unter Einstellungen - Allgemein, ganz unten im Abschnitt "Spurfolger": Abstand, Höchstgeschwindigkeit, Reichweite, Suchradius, Fahrzeuge je Reihe, Zeit bis zum Aufgeben, Wartezeit, Licht und Rundumleuchte. Im Multiplayer gelten die Werte für den ganzen Server; ändern darf sie dort nur, wer als Administrator angemeldet ist, bei allen anderen stehen die Zeilen grau. Dieselben Werte liegen weiterhin in "modSettings/FS25_TrailMe/settings.xml" und lassen sich über die Konsole setzen: "fmInfo" zeigt alle, "fmSet <name> <wert>" ändert einen, "fmStopp" hält alles an.
 
 Multiplayer: Gefahren wird auf dem Server, alle Mitspieler sehen dasselbe. Jeder Spieler kann nur Fahrzeuge losschicken, auf die seine Farm Zugriff hat. Mit STRG + J gibst du deine ganze Reihe an einen Mitspieler ab, neben dem du stehst - praktisch, wenn er weiterfährt und du etwas anderes machst. Steigst du zwischendurch aus - Tor öffnen, tanken, kurz etwas anderes machen -, bleibt die Reihe stehen und wartet auf dich. Aufgelöst wird sie erst, wenn der Fahrer das Spiel verlassen hat. Serverbetreiber und Administratoren können mit dem Konsolenbefehl "fmStopp" alle Reihen auf einmal auflösen.
 
-Hinweis: Es wird nur vorwärts gefahren und es findet keine Wegsuche statt - in sehr engen Hofeinfahrten kann ein Gespann hängen bleiben. Bleibt das Fahrzeug zu lange stehen, beendet die Mod das Folgen von selbst.
+Hinweis: Es wird nur vorwärts gefahren und es findet keine Wegsuche statt - in sehr engen Hofeinfahrten kann ein Gespann hängen bleiben. Die Mod meldet sich, bevor etwas abreißt: wenn ein Folger nicht weiterkommt, wenn ihm der Sprit ausgeht, und wenn du ihm davonfährst. In den ersten beiden Fällen geht zusätzlich seine Rundumleuchte an, damit du siehst, welches Fahrzeug es ist. Wie lange er feststecken darf, bevor die Mod aufgibt, stellst du im Menü ein.
 
 Wer mein Coworker HUD nutzt, sieht dort nebenbei, welches Fahrzeug gerade wem folgt. Nötig ist es nicht - die beiden Mods kennen sich nur, wenn ohnehin beide geladen sind.
 
@@ -65,11 +67,13 @@ The vehicle does not take the direct line, it follows your track: it records you
 
 Nothing follows a player on foot by design - the function can only be triggered from behind the wheel.
 
-Distance, top speed, search radius and the maximum number of vehicles in a line can be configured. The values live in "modSettings/FS25_TrailMe/settings.xml" and can be changed in game from the console: "fmInfo" lists all values, "fmSet <name> <value>" sets one, "fmStopp" stops everything.
+A follower switches its lights and beacon on when you switch on yours - turn them on for the road and the whole line lights up. Which headlights those are is up to the vehicle, just as with the game's own helpers. If you prefer it tied to the clock, set the lights to "when dark" in the menu.
+
+Everything is set in the game menu under Settings - General, at the bottom in the "Trail Me" section: distance, top speed, range, search radius, vehicles per line, time before giving up, waiting time, lights and beacon. In multiplayer the values apply to the whole server; only a player logged in as administrator may change them, for everyone else those rows stay greyed out. The same values still live in "modSettings/FS25_TrailMe/settings.xml" and can be set from the console: "fmInfo" lists all of them, "fmSet <name> <value>" changes one, "fmStopp" stops everything.
 
 Multiplayer: driving happens on the server, everyone sees the same thing. A player can only send out vehicles their farm has access to. CTRL + J hands your whole line over to another player you are standing next to - handy when they carry on and you do something else. If you get out for a moment - opening a gate, refuelling, doing something else - the line stays put and waits for you. It only breaks up once the driver has left the game. Server owners and admins can dissolve every line at once with the console command "fmStopp".
 
-Note: the vehicle only drives forwards and there is no path finding - in very tight farm entrances a combination may get stuck. If a vehicle stands still for too long, the mod ends the following on its own.
+Note: the vehicle only drives forwards and there is no path finding - in very tight farm entrances a combination may get stuck. The mod speaks up before anything breaks: when a follower cannot get through, when it is running out of fuel, and when you are pulling away from it. In the first two cases its beacon comes on as well, so you can see which vehicle it is. How long it may stay stuck before the mod gives up is set in the menu.
 
 If you also run my Coworker HUD, it shows there which vehicle is currently following whom. It is not required - the two mods only notice each other when both happen to be loaded.
 
@@ -97,11 +101,13 @@ Le véhicule ne coupe pas à travers champs : il enregistre votre trajet et le r
 
 Rien ne suit un joueur à pied, c'est voulu : la fonction ne se déclenche qu'au volant.
 
-La distance, la vitesse maximale, le rayon de recherche et le nombre maximal de véhicules par file se règlent. Les valeurs se trouvent dans "modSettings/FS25_TrailMe/settings.xml" et se modifient en jeu depuis la console : "fmInfo" affiche toutes les valeurs, "fmSet <nom> <valeur>" en modifie une, "fmStopp" arrête tout.
+Le suiveur allume ses feux et son gyrophare quand vous allumez les vôtres - allumez-les pour la route et toute la file s'éclaire. Quels phares exactement, c'est le véhicule qui le décide, comme pour les aides du jeu. Si vous préférez vous fier à l'heure, réglez l'éclairage sur « à la tombée du jour » dans le menu.
+
+Tout se règle dans le menu du jeu, sous Réglages - Général, en bas dans la section "Sur ma trace" : distance, vitesse maximale, portée, rayon de recherche, véhicules par file, délai avant abandon, temps d'attente, éclairage et gyrophare. En multijoueur les valeurs valent pour tout le serveur ; seul un joueur connecté comme administrateur peut les modifier, pour les autres ces lignes restent grisées. Les mêmes valeurs figurent toujours dans "modSettings/FS25_TrailMe/settings.xml" et se définissent depuis la console : "fmInfo" les affiche toutes, "fmSet <nom> <valeur>" en modifie une, "fmStopp" arrête tout.
 
 Multijoueur : la conduite est calculée sur le serveur, tous les joueurs voient la même chose. Chaque joueur ne peut envoyer que les véhicules auxquels sa ferme a accès. CTRL + J transmet toute votre file à un joueur voisin - pratique lorsqu'il poursuit la route et que vous faites autre chose. Si vous descendez un instant - ouvrir un portail, faire le plein, faire autre chose -, la file reste en place et vous attend. Elle ne se défait que lorsque le conducteur a quitté la partie. Les administrateurs peuvent dissoudre toutes les files d'un coup avec la commande "fmStopp".
 
-Remarque : le véhicule roule uniquement en marche avant et ne calcule pas d'itinéraire - dans une entrée de ferme très étroite, un attelage peut rester bloqué. Si le véhicule reste trop longtemps immobile, le mod met fin au suivi de lui-même.
+Remarque : le véhicule roule uniquement en marche avant et ne calcule pas d'itinéraire - dans une entrée de ferme très étroite, un attelage peut rester bloqué. Le mod vous prévient avant toute rupture : quand un suiveur n'avance plus, quand il manque de carburant et quand vous le distancez. Dans les deux premiers cas son gyrophare s'allume aussi, pour repérer le véhicule concerné. La durée de blocage tolérée avant abandon se règle dans le menu.
 
 Si vous utilisez aussi mon Coworker HUD, il indique au passage quel véhicule suit qui. Ce n'est pas obligatoire : les deux mods ne se reconnaissent que si les deux sont chargés.
 
@@ -115,6 +121,9 @@ Mod de script, donc uniquement pour PC et Mac.]]></fr>
     <extraSourceFiles>
         <sourceFile filename="FolgeMirMain.lua"/>
         <sourceFile filename="FolgeMirEvent.lua"/>
+        <sourceFile filename="FolgeMirMeldungEvent.lua"/>
+        <sourceFile filename="FolgeMirSettingsEvent.lua"/>
+        <sourceFile filename="FolgeMirMenu.lua"/>
     </extraSourceFiles>
 
     <specializations>
@@ -325,19 +334,198 @@ Mod de script, donc uniquement pour PC et Mac.]]></fr>
             <fr>Comment il roule</fr>
         </text>
         <text name="fm_help_drive">
-            <de>Das Fahrzeug fährt deine Spur nach statt der Luftlinie und hält dabei Abstand. Es fährt nur vorwärts und sucht sich keinen Weg um Hindernisse. Bleibt es zu lange stehen, endet das Folgen von selbst.</de>
-            <en>The vehicle follows your track instead of the direct line and keeps its distance. It only drives forwards and does not search a way around obstacles. If it stands still for too long, following ends on its own.</en>
-            <fr>Le véhicule refait votre trajet au lieu de couper tout droit et garde ses distances. Il roule uniquement en marche avant et ne contourne pas les obstacles. S'il reste trop longtemps immobile, le suivi prend fin.</fr>
+            <de>Das Fahrzeug fährt deine Spur nach statt der Luftlinie und hält dabei Abstand. Es fährt nur vorwärts und sucht sich keinen Weg um Hindernisse. Rangierst du zurück, wartet es, statt den Weg rückwärts mitzufahren. Macht du dein Licht an, macht es seins an. Kommt es nicht weiter oder geht ihm der Sprit aus, geht seine Rundumleuchte an und du bekommst eine Meldung. Fährst du ihm davon, meldet es sich, bevor der Abstand reißt. Bleibt es trotzdem stehen, endet das Folgen von selbst.</de>
+            <en>The vehicle follows your track instead of the direct line and keeps its distance. It only drives forwards and does not search a way around obstacles. When you shunt backwards it waits instead of retracing your way in reverse. Switch your lights on and it switches on its own. If it cannot get through, or runs low on fuel, its beacon comes on and you get a message. If you pull away from it, it says so before the gap breaks. If it still does not move, following ends on its own.</en>
+            <fr>Le véhicule refait votre trajet au lieu de couper tout droit et garde ses distances. Il roule uniquement en marche avant et ne contourne pas les obstacles. Lorsque vous manœuvrez en marche arrière, il attend au lieu de refaire le chemin à reculons. Allumez vos feux et il allume les siens. S'il n'avance plus ou manque de carburant, son gyrophare s'allume et vous recevez un message. Si vous le distancez, il vous prévient avant la rupture. S'il reste immobile, le suivi prend fin.</fr>
         </text>
+        <text name="fm_warnFest">
+            <de>Ein Fahrzeug hinter dir kommt nicht weiter.</de>
+            <en>A vehicle behind you is stuck.</en>
+            <fr>Un véhicule derrière vous est bloqué.</fr>
+        </text>
+
+        <text name="fm_warnSprit">
+            <de>Einem Fahrzeug hinter dir geht der Sprit aus.</de>
+            <en>A vehicle behind you is running out of fuel.</en>
+            <fr>Un véhicule derrière vous va tomber en panne de carburant.</fr>
+        </text>
+        <text name="fm_warnAbstand">
+            <de>Du fährst deinen Folgern davon.</de>
+            <en>You are pulling away from your followers.</en>
+            <fr>Vous distancez vos suiveurs.</fr>
+        </text>
+
+        <text name="fm_m_abschnitt">
+            <de>Spurfolger</de>
+            <en>Trail Me</en>
+            <fr>Sur ma trace</fr>
+        </text>
+        <text name="fm_m_nurAdmin">
+            <de>Diese Einstellung darf nur der Administrator ändern.</de>
+            <en>Only the administrator may change this setting.</en>
+            <fr>Seul l'administrateur peut modifier ce réglage.</fr>
+        </text>
+        <text name="fm_m_nurAdminKurz">
+            <de>nur Administrator</de>
+            <en>administrator only</en>
+            <fr>administrateur uniquement</fr>
+        </text>
+        <text name="fm_m_aus">
+            <de>Aus</de>
+            <en>Off</en>
+            <fr>Désactivé</fr>
+        </text>
+        <text name="fm_m_an">
+            <de>An</de>
+            <en>On</en>
+            <fr>Activé</fr>
+        </text>
+        <text name="fm_m_auto">
+            <de>Bei Dunkelheit</de>
+            <en>When dark</en>
+            <fr>À la tombée du jour</fr>
+        </text>
+        <text name="fm_m_wieVorn">
+            <de>Wie vorne</de>
+            <en>Same as the leader</en>
+            <fr>Comme le véhicule de tête</fr>
+        </text>
+        <text name="fm_m_immer">
+            <de>Immer an</de>
+            <en>Always on</en>
+            <fr>Toujours allumé</fr>
+        </text>
+        <text name="fm_m_amHud">
+            <de>Oben rechts</de>
+            <en>Top right</en>
+            <fr>En haut à droite</fr>
+        </text>
+        <text name="fm_m_frei">
+            <de>Freie Stelle</de>
+            <en>Free position</en>
+            <fr>Position libre</fr>
+        </text>
+
+        <text name="fm_m_abstand">
+            <de>Abstand</de>
+            <en>Distance</en>
+            <fr>Distance</fr>
+        </text>
+        <text name="fm_m_abstand_lang">
+            <de>Lücke zwischen dem Heck des vorderen und der Front des folgenden Gespanns.</de>
+            <en>Gap between the rear of the vehicle in front and the front of the one following.</en>
+            <fr>Espace entre l'arrière de l'attelage de devant et l'avant de celui qui suit.</fr>
+        </text>
+        <text name="fm_m_tempo">
+            <de>Höchstgeschwindigkeit</de>
+            <en>Top speed</en>
+            <fr>Vitesse maximale</fr>
+        </text>
+        <text name="fm_m_tempo_lang">
+            <de>Schneller fährt ein Folger nicht, auch wenn du selbst schneller unterwegs bist.</de>
+            <en>A follower will not go faster than this, even if you do.</en>
+            <fr>Un suiveur ne dépassera pas cette vitesse, même si vous allez plus vite.</fr>
+        </text>
+        <text name="fm_m_fest">
+            <de>Zeit bis zum Aufgeben</de>
+            <en>Time before giving up</en>
+            <fr>Délai avant abandon</fr>
+        </text>
+        <text name="fm_m_fest_lang">
+            <de>So lange darf ein Folger feststecken, bevor das Folgen endet. Gewarnt wird nach sechs Sekunden - der Rest ist deine Zeit zum Rangieren.</de>
+            <en>How long a follower may stay stuck before following ends. The warning comes after six seconds; the rest is your time to shunt.</en>
+            <fr>Durée pendant laquelle un suiveur peut rester bloqué avant la fin du suivi. L’avertissement arrive au bout de six secondes ; le reste est votre temps pour manœuvrer.</fr>
+        </text>
+        <text name="fm_m_leer">
+            <de>Wartezeit ohne Fahrer</de>
+            <en>Waiting time without a driver</en>
+            <fr>Attente sans conducteur</fr>
+        </text>
+        <text name="fm_m_leer_lang">
+            <de>So lange wartet die Reihe, wenn der Fahrer vorne das Spiel verlassen hat. Steigt er nur kurz aus, bleibt sie ohnehin stehen.</de>
+            <en>How long the line waits once the driver in front has left the game. If they only step out briefly, it waits anyway.</en>
+            <fr>Durée d'attente de la file lorsque le conducteur de tête a quitté la partie. S'il descend juste un instant, elle attend de toute façon.</fr>
+        </text>
+        <text name="fm_m_folger">
+            <de>Fahrzeuge je Reihe</de>
+            <en>Vehicles per line</en>
+            <fr>Véhicules par file</fr>
+        </text>
+        <text name="fm_m_folger_lang">
+            <de>Mehr Fahrzeuge nimmt eine Reihe nicht auf.</de>
+            <en>A line will not take more vehicles than this.</en>
+            <fr>Une file n'acceptera pas plus de véhicules.</fr>
+        </text>
+        <text name="fm_m_radius">
+            <de>Suchradius</de>
+            <en>Search radius</en>
+            <fr>Rayon de recherche</fr>
+        </text>
+        <text name="fm_m_radius_lang">
+            <de>So weit darf das Fahrzeug entfernt stehen, das du auf die Taste hin ansprechen willst.</de>
+            <en>How far away a vehicle may stand and still be picked up when you press the key.</en>
+            <fr>Distance maximale à laquelle un véhicule peut se trouver pour répondre à la touche.</fr>
+        </text>
+        <text name="fm_m_reichweite">
+            <de>Reichweite</de>
+            <en>Range</en>
+            <fr>Portée</fr>
+        </text>
+        <text name="fm_m_reichweite_lang">
+            <de>Reißt der Abstand zum vorderen Fahrzeug weiter als das, endet das Folgen.</de>
+            <en>If the gap to the vehicle in front grows larger than this, following ends.</en>
+            <fr>Si l'écart avec le véhicule de devant dépasse cette valeur, le suivi prend fin.</fr>
+        </text>
+        <text name="fm_m_licht">
+            <de>Licht</de>
+            <en>Lights</en>
+            <fr>Éclairage</fr>
+        </text>
+        <text name="fm_m_licht_lang">
+            <de>Ein Fahrzeug ohne Fahrer schaltet selbst kein Licht ein. "Wie vorne" koppelt es an deins, "bei Dunkelheit" an die Tageszeit.</de>
+            <en>A vehicle without a driver will not switch on its lights. "Same as the leader" ties them to yours, "when dark" to the time of day.</en>
+            <fr>Un véhicule sans conducteur n'allume pas ses feux. « Comme le véhicule de tête » les lie aux vôtres, « à la tombée du jour » à l'heure.</fr>
+        </text>
+        <text name="fm_m_leuchte">
+            <de>Rundumleuchte</de>
+            <en>Beacon light</en>
+            <fr>Gyrophare</fr>
+        </text>
+        <text name="fm_m_leuchte_lang">
+            <de>Steckt ein Folger fest, geht die Leuchte in jedem Fall an - so findest du das Fahrzeug, das nicht weiterkommt.</de>
+            <en>If a follower gets stuck the beacon comes on regardless, so you can spot the vehicle that is not getting through.</en>
+            <fr>Si un suiveur se bloque, le gyrophare s'allume dans tous les cas : vous repérez ainsi le véhicule en difficulté.</fr>
+        </text>
+        <text name="fm_m_hud">
+            <de>Anzeige der Folger</de>
+            <en>Follower display</en>
+            <fr>Affichage des suiveurs</fr>
+        </text>
+        <text name="fm_m_hud_lang">
+            <de>Die Zeile, die zeigt, wer dir folgt. Die freie Stelle stellst du mit fmSet hudX und hudY ein.</de>
+            <en>The line showing who is following you. The free position is set with fmSet hudX and hudY.</en>
+            <fr>La ligne indiquant qui vous suit. La position libre se règle avec fmSet hudX et hudY.</fr>
+        </text>
+        <text name="fm_m_spur">
+            <de>Spur einzeichnen</de>
+            <en>Show the track</en>
+            <fr>Afficher le trajet</fr>
+        </text>
+        <text name="fm_m_spur_lang">
+            <de>Zeichnet die Wegpunkte ins Bild. Gedacht für die Fehlersuche, wenn ein Fahrzeug seltsam fährt.</de>
+            <en>Draws the waypoints into the picture. Meant for tracking down why a vehicle drives oddly.</en>
+            <fr>Dessine les points de passage à l'écran. Utile pour comprendre pourquoi un véhicule roule bizarrement.</fr>
+        </text>
+
         <text name="fm_help_configTitle">
             <de>Einstellungen</de>
             <en>Settings</en>
             <fr>Réglages</fr>
         </text>
         <text name="fm_help_config">
-            <de>Abstand, Höchstgeschwindigkeit und Suchradius stehen in modSettings/FS25_TrailMe/settings.xml. Im Spiel zeigt der Konsolenbefehl fmInfo alle Werte, fmSet ändert einen und fmStopp hält alles an. Die Zeile mit den Folgern sitzt oben rechts unter der Info-Leiste. Mit fmSet hudAnzeigen 0 ist sie aus, mit 2 steht sie wieder frei an der Stelle aus hudX und hudY.</de>
-            <en>Distance, top speed and search radius are stored in modSettings/FS25_TrailMe/settings.xml. In game the console command fmInfo lists all values, fmSet changes one and fmStopp stops everything. The line listing the followers sits in the top right corner, below the info bar. fmSet hudAnzeigen 0 turns it off, 2 puts it back to the free position from hudX and hudY.</en>
-            <fr>La distance, la vitesse maximale et le rayon de recherche se trouvent dans modSettings/FS25_TrailMe/settings.xml. En jeu, fmInfo affiche toutes les valeurs, fmSet en modifie une et fmStopp arrête tout. La ligne des suiveurs s'affiche en haut à droite, sous la barre d'informations. fmSet hudAnzeigen 0 la masque, 2 la replace librement selon hudX et hudY.</fr>
+            <de>Alle Einstellungen stehen im Spielmenü unter Einstellungen - Allgemein, ganz unten im Abschnitt Spurfolger: Abstand, Höchstgeschwindigkeit, Reichweite, Zeit bis zum Aufgeben, Licht und Rundumleuchte. Im Mehrspieler gelten sie für den ganzen Server, ändern darf sie dort nur der Administrator. Dieselben Werte liegen in modSettings/FS25_TrailMe/settings.xml; fmInfo zeigt sie alle, fmSet ändert einen, fmStopp hält alles an.</de>
+            <en>All settings are in the game menu under Settings - General, at the bottom in the Trail Me section: distance, top speed, range, time before giving up, lights and beacon. In multiplayer they apply to the whole server and only the administrator may change them. The same values live in modSettings/FS25_TrailMe/settings.xml; fmInfo lists them all, fmSet changes one, fmStopp stops everything.</en>
+            <fr>Tous les réglages se trouvent dans le menu du jeu, sous Réglages - Général, en bas dans la section Sur ma trace : distance, vitesse maximale, portée, délai avant abandon, éclairage et gyrophare. En multijoueur ils valent pour tout le serveur et seul l'administrateur peut les modifier. Les mêmes valeurs figurent dans modSettings/FS25_TrailMe/settings.xml ; fmInfo les affiche toutes, fmSet en modifie une, fmStopp arrête tout.</fr>
         </text>
     </l10n>
 </modDesc>

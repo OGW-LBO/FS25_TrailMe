@@ -36,7 +36,14 @@ FolgeMirVehicle.SPUR_ABSTAND = 2.5      -- m, Abstand zweier Wegpunkte
 FolgeMirVehicle.SPUR_MAX     = 200      -- Wegpunkte maximal
 FolgeMirVehicle.PUNKT_RADIUS = 3.0      -- m, ab hier gilt ein Wegpunkt als erreicht
 FolgeMirVehicle.LOOKAHEAD    = 7.0      -- m, Vorausschau auf der Spur
-FolgeMirVehicle.FEST_ZEIT    = 12000    -- ms Gas ohne Bewegung, dann abbrechen
+FolgeMirVehicle.SPRIT_WARNUNG    = 0.10 -- Tankanteil, ab dem gewarnt wird
+FolgeMirVehicle.SPRIT_ENTWARNUNG = 0.15 -- ab hier gilt wieder als getankt
+FolgeMirVehicle.WEG_WARNUNG      = 0.80 -- Anteil der Reichweite, dann warnen
+FolgeMirVehicle.WEG_ENTWARNUNG   = 0.60
+
+FolgeMirVehicle.FEST_WARNUNG = 6000     -- ms Gas ohne Bewegung, dann warnen
+                                        -- (wann aufgegeben wird, steht in
+                                        -- der Einstellung festSekunden)
 FolgeMirVehicle.ANFAHR_TEMPO = 3        -- km/h Mindest-Fahrtempo
 FolgeMirVehicle.LOSFAHR_PLUS = 3        -- m, die das Ziel sich entfernen muss, bevor
                                         -- ein haltendes Fahrzeug wieder anfaehrt
@@ -157,6 +164,112 @@ local function gespannAusdehnung(fahrzeug, bezugsKnoten)
     return maxZ, -minZ
 end
 
+--- Wie voll ist der am schlechtesten gefuellte Tank? Geprueft wird dieselbe
+--- Liste, an der auch das Spiel entscheidet, ob der Motor laufen darf
+--- (Motorized.lua:1972) - damit zaehlen Diesel, Methan und Strom gleich.
+--- Ohne Tank (nichts zu melden) kommt nil zurueck.
+local function getTankAnteil(fahrzeug)
+    local spec = fahrzeug.spec_motorized
+
+    if spec == nil or spec.propellantFillUnitIndices == nil then
+        return nil
+    end
+
+    if fahrzeug.getFillUnitFillLevelPercentage == nil then
+        return nil
+    end
+
+    local wenigste = nil
+
+    for _, index in ipairs(spec.propellantFillUnitIndices) do
+        local anteil = fahrzeug:getFillUnitFillLevelPercentage(index)
+
+        if anteil ~= nil and (wenigste == nil or anteil < wenigste) then
+            wenigste = anteil
+        end
+    end
+
+    return wenigste
+end
+
+--- Brennt an diesem Fahrzeug ein Scheinwerfer? Die Lichtmaske fuehrt oberhalb
+--- von maxLightStateMask noch Bremslicht, Blinker, Rueckfahrlicht und
+--- Innenraum mit (Lights.lua:353 ff.) - ohne die Maskierung waere beim Bremsen
+--- "Licht an". Das Spiel vergleicht an derselben Stelle genauso.
+local function hatLichtAn(fahrzeug)
+    if fahrzeug == nil or fahrzeug.getLightsTypesMask == nil then
+        return false
+    end
+
+    local spec = fahrzeug.spec_lights
+
+    if spec == nil or spec.maxLightStateMask == nil or bit32 == nil then
+        return false
+    end
+
+    return bit32.band(fahrzeug:getLightsTypesMask(), spec.maxLightStateMask) ~= 0
+end
+
+--- Schaltet das Licht so, wie es das Spiel bei seinen eigenen Helfern tut:
+--- updateAutomaticLights nimmt die Lichtmaske, die in der Fahrzeug-XML fuer
+--- den automatischen Betrieb hinterlegt ist. Welche Scheinwerfer ein Fahrzeug
+--- dabei anwirft, entscheidet also das Fahrzeug selbst.
+---
+--- Modus 1 haengt am Fahrzeug an der Spitze, 2 an der Tageszeit.
+local function lichtNachziehen(self, daten)
+    local modus = FolgeMirMain.einstellungen.licht or 0
+
+    if modus ~= 1 and modus ~= 2 then
+        return
+    end
+
+    if self.updateAutomaticLights == nil then
+        return
+    end
+
+    local soll = false
+
+    if modus == 1 then
+        soll = hatLichtAn(daten.ziel)
+    elseif g_currentMission ~= nil and g_currentMission.environment ~= nil then
+        soll = g_currentMission.environment.isSunOn == false
+    end
+
+    if daten.lichtAn ~= soll then
+        daten.lichtAn = soll
+        self:updateAutomaticLights(soll, false)
+    end
+end
+
+--- Warnleuchte: 0 aus, 1 wie am vorderen Fahrzeug, 2 immer an. Steckt der
+--- Folger fest, geht sie in jedem Fall an - so sieht man schon von weitem,
+--- welches Fahrzeug nicht weiterkommt.
+local function warnleuchteNachziehen(self, daten, steckt)
+    local modus = FolgeMirMain.einstellungen.warnleuchte or 0
+
+    if self.setBeaconLightsVisibility == nil then
+        return
+    end
+
+    local soll = false
+
+    if modus == 2 then
+        soll = true
+    elseif modus == 1 and daten.ziel ~= nil
+        and daten.ziel.getBeaconLightsVisibility ~= nil then
+        soll = daten.ziel:getBeaconLightsVisibility() == true
+    end
+
+    if steckt then
+        soll = true
+    end
+
+    if daten.leuchteAn ~= soll then
+        daten.leuchteAn = soll
+        self:setBeaconLightsVisibility(soll)
+    end
+end
+
 -- ============================================================================
 -- Registrierung
 -- ============================================================================
@@ -208,6 +321,13 @@ function FolgeMirVehicle:fmGetDaten()
             tempomatVorher = nil,     -- gemerkt: eingestellte Tempomat-Geschwindigkeit
             forceVorher    = nil,     -- gemerkt: forceIsActive
             letzterTakt    = nil,     -- g_updateLoopIndex des letzten Fahrtakts
+            festGewarnt    = false,   -- Warnung schon herausgegeben?
+            spritGewarnt   = false,
+            wegGewarnt     = false,
+            spritKnapp     = false,   -- Ergebnis der letzten Tankmessung
+            lichtAn        = nil,     -- hat die Mod das Licht eingeschaltet?
+            lichtVorher    = nil,     -- gemerkt: Lichtmaske beim Losschicken
+            leuchteAn      = nil,     -- hat die Mod die Warnleuchte geschaltet?
             werte          = {},      -- letzte Messwerte fuer den Befehl fmDebug
             actionEvents   = {}       -- Tastenbelegung, solange man im Fahrzeug sitzt
         }
@@ -371,6 +491,10 @@ function FolgeMirVehicle:fmStartFolgen(ziel, ohneEvent)
     daten.massTimer   = 0
     daten.leerTimer   = 0
     daten.fuehrerId   = nil
+    daten.festGewarnt  = false
+    daten.spritGewarnt = false
+    daten.wegGewarnt   = false
+    daten.spritKnapp   = false
 
     if self.isServer then
         -- Ohne das hier lenkt das Fahrzeug nicht: WheelPhysics:serverUpdate
@@ -407,6 +531,12 @@ function FolgeMirVehicle:fmStartFolgen(ziel, ohneEvent)
             and self.spec_drivable.cruiseControl ~= nil then
             daten.tempomatVorher = self.spec_drivable.cruiseControl.speed
         end
+
+        -- Licht und Warnleuchte werden am Ende wieder auf den Stand gebracht,
+        -- den der Spieler eingestellt hatte.
+        if daten.lichtVorher == nil and self.getLightsTypesMask ~= nil then
+            daten.lichtVorher = self:getLightsTypesMask()
+        end
     end
 
     -- Erster Wegpunkt, damit die Spur nicht leer startet
@@ -442,8 +572,12 @@ function FolgeMirVehicle:fmStoppFolgen(ohneEvent, grund)
         return false
     end
 
+    -- An die Wurzel der Reihe, nicht an den direkten Vordermann: ab dem
+    -- zweiten Glied ist der ein Fahrzeug ohne Fahrer und niemand saehe die
+    -- Meldung. Hier steht die Reihe noch, daten.aktiv wird erst unten
+    -- zurueckgesetzt.
     if grund ~= nil and grund > 0 then
-        FolgeMirMain.meldungGrund(daten.ziel, grund)
+        FolgeMirMain.meldungGrund(FolgeMirMain.getWurzel(self), grund)
     end
 
     -- Steht dieses Fahrzeug mitten in einer Kette, ruecken die dahinter auf
@@ -504,6 +638,21 @@ function FolgeMirVehicle:fmStoppFolgen(ohneEvent, grund)
         end
 
         daten.motorLief = nil
+
+        -- Licht nur dann zuruecknehmen, wenn die Mod es selbst angemacht hat
+        -- und niemand eingestiegen ist.
+        if daten.lichtAn == true and not besetzt
+            and self.setLightsTypesMask ~= nil then
+            self:setLightsTypesMask(daten.lichtVorher or 0)
+        end
+
+        if daten.leuchteAn == true and self.setBeaconLightsVisibility ~= nil then
+            self:setBeaconLightsVisibility(false)
+        end
+
+        daten.lichtAn     = nil
+        daten.lichtVorher = nil
+        daten.leuchteAn   = nil
     end
 
     FolgeMirMain.merkeFolger(self, false)
@@ -525,6 +674,16 @@ local function spurPflegen(daten, zx, zy, zz)
 
     if letzter == nil then
         table.insert(daten.spur, { x = zx, y = zy, z = zz })
+        return
+    end
+
+    -- Rangiert das vordere Fahrzeug zurueck, bekommt die Spur keine neuen
+    -- Punkte. Sonst wandert sie mit nach hinten, der Folger faehrt das
+    -- Zickzack nach und schiebt dabei auf - beim Rangieren am Hof gut zu
+    -- sehen. Ohne neue Punkte bleibt die alte Spur stehen und der Folger
+    -- wartet einfach, bis es wieder vorwaerts geht.
+    if daten.ziel ~= nil and daten.ziel.movingDirection ~= nil
+        and daten.ziel.movingDirection < 0 then
         return
     end
 
@@ -693,6 +852,24 @@ function FolgeMirVehicle:fmFahrTakt(dt)
         return
     end
 
+    -- Bevor die Reihe abreisst, einmal Bescheid geben. Wer schneller faehrt
+    -- als die eingestellte Hoechstgeschwindigkeit, verliert seine Folger
+    -- sonst ohne Vorwarnung.
+    local wegAnteil = luftlinie / einst.maxZielentfernung
+
+    if wegAnteil > FolgeMirVehicle.WEG_WARNUNG then
+        if not daten.wegGewarnt then
+            daten.wegGewarnt = true
+
+            if FolgeMirMeldungEvent ~= nil then
+                FolgeMirMeldungEvent.sende(FolgeMirMain.getWurzel(self),
+                    FolgeMirMain.GRUND_WARN_ABSTAND)
+            end
+        end
+    elseif wegAnteil < FolgeMirVehicle.WEG_ENTWARNUNG then
+        daten.wegGewarnt = false
+    end
+
     -- --- Gespannmasse -------------------------------------------------------
     -- Nicht jeden Frame: Anbaugeraete wechseln selten, die Messung laeuft
     -- ueber die ganze Anhaengerkette.
@@ -707,6 +884,27 @@ function FolgeMirVehicle:fmFahrTakt(dt)
 
         daten.zielHeck   = zielHeck
         daten.eigenFront = eigenFront
+
+        -- Tankstand im selben Takt, das muss nicht jeden Frame sein
+        local anteil = getTankAnteil(self)
+
+        if anteil == nil then
+            daten.spritKnapp = false
+        elseif anteil < FolgeMirVehicle.SPRIT_WARNUNG then
+            daten.spritKnapp = true
+
+            if not daten.spritGewarnt then
+                daten.spritGewarnt = true
+
+                if FolgeMirMeldungEvent ~= nil then
+                    FolgeMirMeldungEvent.sende(FolgeMirMain.getWurzel(self),
+                        FolgeMirMain.GRUND_WARN_SPRIT)
+                end
+            end
+        elseif anteil > FolgeMirVehicle.SPRIT_ENTWARNUNG then
+            daten.spritKnapp   = false
+            daten.spritGewarnt = false
+        end
     end
 
     -- --- Tempo des Ziels schaetzen ------------------------------------------
@@ -788,22 +986,45 @@ function FolgeMirVehicle:fmFahrTakt(dt)
 
     -- --- Feststeck-Erkennung ------------------------------------------------
 
+    local steckt = false
+
     if darfFahren then
         local tempoIst = math.abs(self.lastSpeedReal or 0) * 3600
 
         if tempoIst < 0.5 then
             daten.festTimer = daten.festTimer + dt
 
-            if daten.festTimer > FolgeMirVehicle.FEST_ZEIT then
+            if daten.festTimer > einst.festSekunden * 1000 then
                 self:fmStoppFolgen(false, FolgeMirMain.GRUND_FEST)
                 return
             end
+
+            -- Auf halbem Weg zum Abbruch einmal Bescheid geben. Wer am Tor
+            -- steht oder quer haengt, kann dann noch rangieren, statt die
+            -- Reihe neu aufbauen zu muessen.
+            if daten.festTimer > FolgeMirVehicle.FEST_WARNUNG then
+                steckt = true
+
+                if not daten.festGewarnt then
+                    daten.festGewarnt = true
+
+                    if FolgeMirMeldungEvent ~= nil then
+                        FolgeMirMeldungEvent.sende(FolgeMirMain.getWurzel(self),
+                            FolgeMirMain.GRUND_WARN_FEST)
+                    end
+                end
+            end
         else
-            daten.festTimer = 0
+            daten.festTimer   = 0
+            daten.festGewarnt = false
         end
     else
-        daten.festTimer = 0
+        daten.festTimer   = 0
+        daten.festGewarnt = false
     end
+
+    lichtNachziehen(self, daten)
+    warnleuchteNachziehen(self, daten, steckt or daten.spritKnapp == true)
 
     -- --- Fahren -------------------------------------------------------------
 

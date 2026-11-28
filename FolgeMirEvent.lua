@@ -170,7 +170,7 @@ function FolgeMirEvent:run(connection)
         -- Der Grund wird noch gegen das alte Ziel geprueft, deshalb vor dem
         -- Zuruecksetzen melden.
         if self.grund ~= nil and self.grund > 0 and self.fahrzeug.fmGetZiel ~= nil then
-            FolgeMirMain.meldungGrund(self.fahrzeug:fmGetZiel(), self.grund)
+            FolgeMirMain.meldungGrund(FolgeMirMain.getWurzel(self.fahrzeug), self.grund)
         end
 
         self.fahrzeug:fmStoppFolgen(true, 0)

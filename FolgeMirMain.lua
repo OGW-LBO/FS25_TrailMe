@@ -35,13 +35,22 @@ FolgeMirMain.GRUND_ZU_WEIT  = 4
 FolgeMirMain.GRUND_FEST     = 5
 FolgeMirMain.GRUND_VERWAIST = 6
 
+-- Kein Abbruch, sondern ein Hinweis: das Fahrzeug steht noch, hat aber
+-- noch etwas Zeit, bevor die Reihe aufgegeben wird.
+FolgeMirMain.GRUND_WARN_FEST    = 7
+FolgeMirMain.GRUND_WARN_SPRIT   = 8
+FolgeMirMain.GRUND_WARN_ABSTAND = 9
+
 FolgeMirMain.gruende = {
     [1] = { "fm_endeZielWeg", "Vorderes Fahrzeug nicht mehr vorhanden - Folgen beendet." },
     [2] = { "fm_endeBesetzt", "Fahrzeug wurde bestiegen - Folgen beendet." },
     [3] = { "fm_endeMotor",   "Motor kann nicht laufen - Folgen beendet." },
     [4] = { "fm_endeZuWeit",  "Zu weit entfernt - Folgen beendet." },
     [5] = { "fm_endeFest",    "Fahrzeug steckt fest - Folgen beendet." },
-    [6] = { "fm_endeLeer",    "Fahrer ist nicht mehr im Spiel - Folgen beendet." }
+    [6] = { "fm_endeLeer",    "Fahrer ist nicht mehr im Spiel - Folgen beendet." },
+    [7] = { "fm_warnFest",    "Ein Fahrzeug hinter dir kommt nicht weiter." },
+    [8] = { "fm_warnSprit",   "Einem Fahrzeug hinter dir geht der Sprit aus." },
+    [9] = { "fm_warnAbstand", "Du faehrst deinen Folgern davon." }
 }
 
 FolgeMirMain.einstellungen = {
@@ -56,7 +65,12 @@ FolgeMirMain.einstellungen = {
     hudAnzeigen       = 1,     -- 0 = aus, 1 = oben rechts am Spiel-HUD,
                                -- 2 = frei ueber hudX und hudY
     hudX              = 0.015,
-    hudY              = 0.30
+    hudY              = 0.30,
+    festSekunden      = 30,    -- so lange darf ein Folger feststecken,
+                               -- bevor das Folgen endet (Warnung bei 6 s)
+    licht             = 1,     -- 0 = aus, 1 = wie vorn, 2 = bei Dunkelheit
+    warnleuchte       = 1,     -- 0 = aus, 1 = wie vorn, 2 = immer an
+    spurZeigen        = 0      -- 1 = Spur im Bild einzeichnen (Fehlersuche)
 }
 
 -- Grenzen fuer die Konsolenbefehle: Name = {min, max}
@@ -69,8 +83,36 @@ FolgeMirMain.grenzen = {
     leerlaufSekunden  = { 10, 1800 },
     hudAnzeigen       = { 0,     2 },
     hudX              = { 0,     1 },
-    hudY              = { 0,     1 }
+    hudY              = { 0,     1 },
+    festSekunden      = { 10,  300 },
+    licht             = { 0,     2 },
+    warnleuchte       = { 0,     2 },
+    spurZeigen        = { 0,     1 }
 }
+
+-- Diese Einstellungen wirken nur auf dem eigenen Bildschirm und werden im
+-- Mehrspieler nicht abgeglichen.
+FolgeMirMain.nurLokal = {
+    hudAnzeigen = true,
+    hudX        = true,
+    hudY        = true,
+    spurZeigen  = true
+}
+
+--- Namen aller Einstellungen in fester Reihenfolge. Der Abgleich im
+--- Mehrspieler schreibt die Werte ohne Namen in den Datenstrom, deshalb
+--- muessen Sender und Empfaenger dieselbe Reihenfolge verwenden.
+function FolgeMirMain.getNamen()
+    local namen = {}
+
+    for name, _ in pairs(FolgeMirMain.einstellungen) do
+        table.insert(namen, name)
+    end
+
+    table.sort(namen)
+
+    return namen
+end
 
 -- ============================================================================
 -- Texte und Meldungen
@@ -672,7 +714,10 @@ function FolgeMirMain.getDateiname()
     return g_currentModSettingsDirectory .. "settings.xml"
 end
 
-function FolgeMirMain.setzeWert(name, wert, ohneSpeichern)
+--- Setzt einen Wert. ohneVerteilen unterdrueckt den Abgleich im Mehrspieler -
+--- das braucht der Empfang eines Ereignisses, der sonst eine Endlosschleife
+--- ausloesen wuerde.
+function FolgeMirMain.setzeWert(name, wert, ohneSpeichern, ohneVerteilen)
     if FolgeMirMain.einstellungen[name] == nil or wert == nil then
         return false
     end
@@ -687,6 +732,13 @@ function FolgeMirMain.setzeWert(name, wert, ohneSpeichern)
 
     if not ohneSpeichern then
         FolgeMirMain.speichereEinstellungen()
+    end
+
+    -- Gefahren wird auf dem Server, dort muessen die Werte also ankommen.
+    -- Die beiden Anzeige-Einstellungen bleiben jedem selbst ueberlassen.
+    if not ohneVerteilen and not FolgeMirMain.nurLokal[name]
+        and FolgeMirSettingsEvent ~= nil then
+        FolgeMirSettingsEvent.sende()
     end
 
     return true
@@ -709,7 +761,9 @@ function FolgeMirMain.ladeEinstellungen()
         local gelesen = xml:getFloat("folgeMir." .. name)
 
         if gelesen ~= nil then
-            FolgeMirMain.setzeWert(name, gelesen, true)
+            -- Weder speichern noch verteilen: beim Laden gibt es im
+            -- Mehrspieler noch keine Ereignis-Kennungen.
+            FolgeMirMain.setzeWert(name, gelesen, true, true)
         end
     end
 
@@ -773,15 +827,8 @@ end
 
 function FolgeMirMain.befehlInfo(_)
     local zeilen = { FolgeMirMain.LOG .. "Einstellungen:" }
-    local namen  = {}
 
-    for name, _ in pairs(FolgeMirMain.einstellungen) do
-        table.insert(namen, name)
-    end
-
-    table.sort(namen)
-
-    for _, name in ipairs(namen) do
+    for _, name in ipairs(FolgeMirMain.getNamen()) do
         table.insert(zeilen, string.format("  %-18s = %s", name,
             tostring(FolgeMirMain.einstellungen[name])))
     end
@@ -939,6 +986,28 @@ function FolgeMirMain:loadMap(name)
             "AIVehicleUtil.driveToPoint nicht gefunden - Fahrzeuge koennen nicht gesteuert werden.")
     end
 
+    -- Ein Dedicated Server hat keine Anzeige, dort entfaellt das Menue.
+    if g_dedicatedServer == nil and g_messageCenter ~= nil and MessageType ~= nil then
+        if MessageType.OWN_PLAYER_ENTERED ~= nil then
+            g_messageCenter:subscribeOneshot(MessageType.OWN_PLAYER_ENTERED, function()
+                if FolgeMirMenu ~= nil then
+                    FolgeMirMenu.baueZeilen()
+                end
+            end, nil)
+        end
+
+        -- Die Einstellungen gelten serverweit. Ein beitretender Client holt
+        -- sie sich, sobald die Ereignis-Kennungen stehen - vorher laufen
+        -- eigene Ereignisse ins Leere.
+        if MessageType.CURRENT_MISSION_LOADED ~= nil then
+            g_messageCenter:subscribeOneshot(MessageType.CURRENT_MISSION_LOADED, function()
+                if FolgeMirSettingsEvent ~= nil then
+                    FolgeMirSettingsEvent.frageAn()
+                end
+            end, nil)
+        end
+    end
+
     Logging.info(FolgeMirMain.LOG .. "geladen.")
 end
 
@@ -999,6 +1068,10 @@ function FolgeMirMain:update(dt)
     end
 
     fahrtakt(dt)
+
+    if FolgeMirMenu ~= nil and not FolgeMirMenu.gebaut then
+        FolgeMirMenu.nachfassen()
+    end
 end
 
 -- ============================================================================
@@ -1216,7 +1289,47 @@ function FolgeMirMain.anzeigeAufraeumen()
     anzeigeGesucht  = false
 end
 
+--- Zeichnet die gefahrene Spur ins Bild. Nur zur Fehlersuche gedacht und
+--- deshalb ab Werk aus. Die Wegpunkte liegen allein auf dem Server, im
+--- Mehrspieler sieht ein Client also nichts.
+local function zeichneSpuren()
+    if drawDebugLine == nil or g_currentMission == nil then
+        return
+    end
+
+    if g_currentMission.getIsServer == nil or not g_currentMission:getIsServer() then
+        return
+    end
+
+    for fahrzeug, _ in pairs(FolgeMirMain.folger) do
+        local daten = fahrzeug ~= nil and fahrzeug.fmDaten or nil
+        local spur  = daten ~= nil and daten.spur or nil
+
+        if spur ~= nil and #spur > 0 then
+            for i = 1, #spur do
+                local p = spur[i]
+
+                -- Senkrechter Strich am Wegpunkt, damit man ihn im Gelaende
+                -- auch auf einer Kuppe findet
+                drawDebugLine(p.x, p.y, p.z, 0, 1, 0,
+                              p.x, p.y + 1.5, p.z, 0, 1, 0)
+
+                local n = spur[i + 1]
+
+                if n ~= nil then
+                    drawDebugLine(p.x, p.y + 0.3, p.z, 0, 0.8, 0,
+                                  n.x, n.y + 0.3, n.z, 0, 0.8, 0)
+                end
+            end
+        end
+    end
+end
+
 function FolgeMirMain:draw()
+    if math.floor((FolgeMirMain.einstellungen.spurZeigen or 0) + 0.5) == 1 then
+        zeichneSpuren()
+    end
+
     -- Der Wert kommt aus der settings.xml und ist dort eine Kommazahl
     local modus = math.floor((FolgeMirMain.einstellungen.hudAnzeigen or 0) + 0.5)
 
